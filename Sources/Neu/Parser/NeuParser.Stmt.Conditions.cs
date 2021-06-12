@@ -132,7 +132,6 @@ namespace Neu
                 end: parser.Position());
         }
 
-
         public static NeuExpression ParseConditionExpression(
             this NeuParser parser, 
             SourceLocation start, 

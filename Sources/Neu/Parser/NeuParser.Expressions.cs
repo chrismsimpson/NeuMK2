@@ -59,7 +59,7 @@ namespace Neu
             {
                 NeuPunctuationType.Comma, 
                 NeuPunctuationType.Colon, 
-                NeuPunctuationType.RightParen, 
+                NeuPunctuationType.RightParen,
                 NeuPunctuationType.LeftBrace
             };
 
