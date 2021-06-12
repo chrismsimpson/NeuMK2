@@ -5,6 +5,9 @@
 using System;
 
 using static System.Console;
+using static System.IO.File;
+
+using static Neu.PathHelpers;
 
 namespace Neu
 {
@@ -12,7 +15,26 @@ namespace Neu
     {
         public static void Main(String[] args)
         {
-            WriteLine($"Hello foo");
+            IRTests();
+            NeuTests();
         }
+
+        public static void IRTests()
+        {
+
+        }
+
+        public static void NeuTests()
+        {
+            var testsDir = GetNeuTestsDirectory();
+
+            var files = GetFiles(testsDir);
+
+
+
+
+
+        }
+
     }
 }

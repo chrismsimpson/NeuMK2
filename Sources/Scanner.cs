@@ -12,11 +12,6 @@ using static Neu.Scanner;
 
 namespace Neu
 {
-    public partial class ScannerPosition
-    {
-        
-    }
-
     public partial class Scanner
     {
         public String Source { get; init; }
@@ -65,6 +60,17 @@ namespace Neu
 
     public static partial class ScannerHelpers
     {
+        public static SourceLocation Position(
+            this Scanner scanner)
+        {
+            return new SourceLocation(
+                rawPosition: scanner.RawPosition,
+                lineNumber: scanner.LineNumber,
+                column: scanner.Column);
+        }
+
+        ///
+
         public static Char Consume(
             this Scanner scanner)
         {
@@ -117,6 +123,20 @@ namespace Neu
             }
 
             return chars;
+        }
+
+        public static String ConsumeString(
+            this Scanner scanner,
+            int length)
+        {
+            var maybeString = scanner.Consume(length: length).ToString();
+
+            if (maybeString is String s)
+            {
+                return s;
+            }
+
+            throw new Exception();
         }
 
         public static Char Consume(
