@@ -5,6 +5,8 @@
 using System;
 using System.Collections.Generic;
 
+using static Neu.NeuTokenizer;
+
 namespace Neu
 {
     public static partial class NeuParserHelpers
@@ -49,7 +51,12 @@ namespace Neu
 
                     return parser.ParseOperatorExpr(op);
 
+                ///
 
+                case NeuPunctuation punc when IsBinaryOperator(punc):
+
+                    return parser.ParseBinaryOperator(punc);
+                    
                 ///
 
                 default:

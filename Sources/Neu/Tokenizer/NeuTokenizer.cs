@@ -112,6 +112,49 @@ namespace Neu
             return c == '-' || c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9' || c == '.';
         }
         
+        ///
+
+        public static bool IsBinaryOperator(
+            NeuPunctuation punc)
+        {
+            switch (punc.PunctuationType)
+            {
+                case NeuPunctuationType.LessThan:
+                    return true;
+
+                ///
+
+                case NeuPunctuationType.GreaterThan:
+                    return true;
+
+                ///
+
+                default:
+                    return false;
+            }
+        }
+
+        ///
+
+        public static NeuBinaryOperatorType? ToBinaryOperatorType(
+            NeuPunctuation punc)
+        {
+            switch (punc.PunctuationType)
+            {
+                case NeuPunctuationType.LessThan:
+                    return NeuBinaryOperatorType.LessThan;
+
+                ///
+
+                case NeuPunctuationType.GreaterThan:
+                    return NeuBinaryOperatorType.GreaterThan;
+
+                ///
+
+                default:
+                    return null;
+            }
+        }
     }
 
     ///
@@ -187,8 +230,14 @@ namespace Neu
             {
                 /// Operators
 
+                case '=' when tokenizer.Scanner.Peek(equals: '='):
+                    return tokenizer.RawTokenizeEqualTo();
+
                 case '+':
                     return tokenizer.RawTokenizePlus();
+
+                case '-':
+                    return tokenizer.RawTokenizeMinus();
 
                 /// Punctuation
 

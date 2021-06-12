@@ -97,5 +97,17 @@ namespace Neu
         {
             return tokenizer.RawTokenizePunctuation("->", NeuPunctuationType.Arrow);
         }
+
+        private static NeuPunctuation RawTokenizeLessThan(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizePunctuation('<', NeuPunctuationType.LessThan);
+        }
+
+        private static NeuPunctuation RawTokenizeGreaterThan(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizePunctuation('>', NeuPunctuationType.GreaterThan);
+        }
     }
 }

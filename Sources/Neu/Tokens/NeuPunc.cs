@@ -15,7 +15,9 @@ namespace Neu
         Semicolon,
         Colon,
         Comma,
-        Arrow
+        Arrow,
+        LessThan,
+        GreaterThan
     }
 
     public partial class NeuPunctuation : NeuToken

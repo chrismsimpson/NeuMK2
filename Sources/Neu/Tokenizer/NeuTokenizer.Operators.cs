@@ -80,5 +80,11 @@ namespace Neu
         {
             return tokenizer.RawTokenizeBinaryOperator('+', NeuBinaryOperatorType.Plus);
         }
+
+        private static NeuBinaryOperator RawTokenizeMinus(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizeBinaryOperator('-', NeuBinaryOperatorType.Minus);
+        }
     }
 }

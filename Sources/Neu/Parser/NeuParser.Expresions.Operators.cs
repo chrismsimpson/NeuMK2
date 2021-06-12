@@ -4,6 +4,8 @@
 
 using System;
 
+using static Neu.NeuTokenizer;
+
 namespace Neu
 {
     public static partial class NeuParserHelpers
@@ -27,6 +29,32 @@ namespace Neu
 
                     throw new Exception();
             }
+        }
+
+        public static NueBinaryOperatorExpr ParseBinaryOperator(
+            this NeuParser parser,
+            NeuPunctuation punc)
+        {
+            var binaryOperatorType = ToBinaryOperatorType(punc);
+
+            if (binaryOperatorType == null)
+            {
+                throw new Exception();
+            }
+
+            ///
+
+            return new NueBinaryOperatorExpr(
+                children: new Node[]
+                {
+                    new NeuBinaryOperator(
+                        source: punc.Source, 
+                        start: punc.Start,
+                        end: punc.End,
+                        binaryOperatorType: binaryOperatorType.Value)
+                },
+                start: punc.Start,
+                end: punc.End);
         }
     }
 }
