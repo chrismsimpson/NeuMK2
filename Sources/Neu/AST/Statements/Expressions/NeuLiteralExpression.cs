@@ -43,5 +43,13 @@ namespace Neu
             : base(children, start, end) { }
     }
 
+    public partial class NeuBooleanLiteralExpr : NeuLiteralExpr
+    {
+        public NeuBooleanLiteralExpr(
+            IEnumerable<Node> children,
+            SourceLocation start,
+            SourceLocation end)
+            : base(children, start, end) { }
+    }
 
 }

@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 namespace Neu
 {
-    public partial class NeuTupleExpr : NeuExpression
+    public partial class NeuIfStatement : NeuStatement
     {
-        public NeuTupleExpr(
+        public NeuIfStatement(
             IEnumerable<Node> children,
             SourceLocation start,
             SourceLocation end)

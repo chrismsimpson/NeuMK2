@@ -8,6 +8,8 @@ using System.Collections.Generic;
 
 using static System.Array;
 
+using static Neu.NeuTokenizer;
+
 namespace Neu
 {
     public static partial class NeuParserHelpers
@@ -47,11 +49,32 @@ namespace Neu
         {
             switch (token)
             {
+                /// Modifiers
+
+                case NeuKeyword keyword when IsStatementModifier(keyword):
+
+                    var next = parser.Tokenizer.Next();
+
+                    if (next == null)
+                    {
+                        throw new Exception();
+                    }
+
+                    return parser.ParseStatement(start, next, modifiers.Append(keyword));
+
                 /// Declarations
 
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Func:
 
                     return parser.ParseFunctionDeclaration(start, token, modifiers);
+
+                /// Control Flow
+
+                case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.If:
+
+                    return parser.ParseIfStatement(start, token, modifiers);
+
+                ///
 
                 ///
 

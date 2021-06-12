@@ -13,7 +13,7 @@ namespace Neu
         public static NeuFunctionDeclaration ParseFunctionDeclaration(
             this NeuParser parser,
             SourceLocation start,
-            Token token,
+            NeuToken token,
             IEnumerable<NeuToken> modifierTokens)
         {
             var children = new List<Node>();

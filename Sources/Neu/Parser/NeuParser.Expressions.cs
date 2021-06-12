@@ -11,29 +11,7 @@ namespace Neu
 {
     public static partial class NeuParserHelpers
     {
-        public static NeuSequenceExpr ParseSequenceExpr(
-            this NeuParser parser,
-            SourceLocation start,
-            NeuToken token,
-            IEnumerable<NeuToken> modifiers)
-        {
-            var children = new List<Node>();
 
-            ///
-
-            var exprList = parser.ParseExprList(start, token, modifiers);
-
-            ///
-
-            children.Add(exprList);
-
-            ///
-
-            return new NeuSequenceExpr(
-                children: children,
-                start: start,
-                end: parser.Position());
-        }
 
         public static NeuExpression ParseExpression(
             this NeuParser parser,
@@ -102,6 +80,42 @@ namespace Neu
                 children: children,
                 start: start,
                 end: parser.Position());
+        }
+
+        ///
+
+        public static NeuSequenceExpr ParseSequenceExpr(
+            this NeuParser parser,
+            SourceLocation start,
+            NeuToken token,
+            IEnumerable<NeuToken> modifiers)
+        {
+            var children = new List<Node>();
+
+            ///
+
+            var exprList = parser.ParseExprList(start, token, modifiers);
+
+            ///
+
+            children.Add(exprList);
+
+            ///
+
+            return new NeuSequenceExpr(
+                children: children,
+                start: start,
+                end: parser.Position());
+        }
+
+        ///
+        
+        public static NeuTupleExpr ParseTupleExpr(
+            this NeuParser parser, 
+            SourceLocation start, 
+            NeuToken token)
+        {
+            throw new Exception();
         }
     }
 }

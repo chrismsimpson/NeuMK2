@@ -13,7 +13,14 @@ namespace Neu
         Case,
         Private,
         Public,
-        Internal
+        Internal,
+        If,
+        Let,
+        Var,
+        True,
+        False,
+        Await,
+        Async
     }
 
     public partial class NeuKeyword : NeuToken

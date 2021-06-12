@@ -155,6 +155,87 @@ namespace Neu
                     return null;
             }
         }
+
+        public static bool IsOptionalBindingKeyword(
+            NeuKeyword keyword)
+        {
+            switch (keyword.KeywordType)
+            {
+                case NeuKeywordType.Let:
+                case NeuKeywordType.Var:
+
+                    return true;
+
+                ///
+
+                default:
+
+                    return false;
+            }
+        }
+
+        public static bool IsBooleanLiteral(
+            NeuKeyword keyword)
+        {
+            switch (keyword.KeywordType)
+            {
+                case NeuKeywordType.True:
+                case NeuKeywordType.False:
+
+                    return true;
+
+                ///
+
+                default:
+
+                    return false;
+            }
+        }
+
+        public static bool IsUsingDecl(
+            NeuKeyword keyword)
+        {
+            switch (keyword.KeywordType)
+            {
+                case NeuKeywordType.Func:
+
+                    return true;
+
+                ///
+
+                default:
+
+                    return false;
+            }
+        }
+
+        public static bool IsStatementModifier(
+            NeuKeyword keyword)
+        {
+            switch (keyword.KeywordType)
+            {
+                /// Access modifiers
+
+                case NeuKeywordType.Public:
+                case NeuKeywordType.Private:
+                case NeuKeywordType.Internal:
+
+                    return true;
+
+                /// Concurrency modifiers
+
+                // case NeuKeywordType.Async:
+                // case NeuKeywordType.Await:
+
+                //     return true;
+
+                ///
+                
+                default: 
+
+                    return false;
+            }
+        }
     }
 
     ///

@@ -37,5 +37,15 @@ namespace Neu
                     throw new Exception();
             }
         }
+
+        ///
+
+        public static NeuBooleanLiteralExpr ParseBooleanLiteralExpr(
+            this NeuParser parser,
+            SourceLocation start,
+            NeuKeyword keyword)
+        {
+            throw new Exception();
+        }
     }
 }   
