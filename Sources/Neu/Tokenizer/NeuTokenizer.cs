@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 using static System.Char;
 using static System.IO.File;
+using static System.String;
+
+using static Neu.NeuTokenizer;
 
 namespace Neu
 {
@@ -31,11 +34,55 @@ namespace Neu
                 new Scanner(contents));
         }
 
-        public static bool IsNumberLiteralStart(
-            Char c)
+        ///
+
+        public static bool IsFloatLiteral(
+            String source)
         {
-            return IsNumber(c) || c == '.' || c == '-';
+            if (IsNullOrWhiteSpace(source))
+            {
+                return false;
+            }
+
+            ///
+
+            foreach (var c in source)
+            {
+                if (!IsNumberLiteralPart(c))
+                {
+                    return false;
+                }
+            }
+
+            ///
+
+            return true;
         }
+
+        public static bool IsIntegerLiteral(
+            String source)
+        {
+            if (IsNullOrWhiteSpace(source))
+            {
+                return false;
+            }
+
+            ///
+
+            foreach (var c in source)
+            {
+                if (!IsIntegerLiteralPart(c))
+                {
+                    return false;
+                }
+            }
+        
+            ///
+
+            return true;
+        }
+
+        ///
 
         public static bool IsIdentifierPart(
             Char c)
@@ -48,6 +95,23 @@ namespace Neu
         {
             return IsLetter(c) || c == '_';
         }
+
+        ///
+
+        public static bool IsIntegerLiteralPart(
+            Char c)
+        {
+            return c == '-' || c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9';
+        }
+
+        ///
+
+        public static bool IsNumberLiteralPart(
+            Char c)
+        {
+            return c == '-' || c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9' || c == '.';
+        }
+        
     }
 
     ///
@@ -121,6 +185,11 @@ namespace Neu
 
             switch (nextChar)
             {
+                /// Operators
+
+                case '+':
+                    return tokenizer.RawTokenizePlus();
+
                 /// Punctuation
 
                 case '{':
@@ -140,14 +209,106 @@ namespace Neu
                 case 'f' when tokenizer.Scanner.PeekThenWhitespace(equals: "unc"):
                     return tokenizer.RawTokenizeFunc();
 
+                /// Identifiers
+
+                case Char c when IsNumberLiteralPart(c):
+                    return tokenizer.RawTokenizeNumberLiteral(c);
+
+                
+
                 ///
 
                 case var _:
                     throw new Exception(); // tokenize string segment?
             }
-
         }
 
-    }
+        ///
 
+        public static IEnumerable<NeuToken> TokenizeUntil(
+            this Tokenizer<NeuToken> tokenizer,
+            bool escapeOnNewline,
+            Func<NeuToken, bool> test)
+        {
+            var tokens = new List<NeuToken>();
+
+            ///
+
+            while (tokenizer.Next() is NeuToken t)
+            {
+                if (test(t))
+                {
+                    tokenizer.Rewind();
+
+                    break;
+                }
+
+                ///
+
+                tokens.Add(t);
+                
+                ///
+
+                if (t.Source.Contains('\n') && escapeOnNewline)
+                {
+                    break;
+                }
+            }
+
+            ///
+
+            return tokens;
+        }
+
+        ///
+
+        public static IEnumerable<NeuToken> TokenizeUntil(
+            this Tokenizer<NeuToken> tokenizer,
+            bool escapeOnNewline,
+            params NeuPunctuationType[] delimiters)
+        {
+            return tokenizer.TokenizeUntil(escapeOnNewline, t => t is NeuPunctuation p && delimiters.Contains(p.PunctuationType));
+        }
+
+        ///
+
+        public static void Rewind(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            tokenizer.Counter--;
+        }
+
+        ///
+
+        public static IEnumerable<NeuToken> Tokenize(
+            this Tokenizer<NeuToken> tokenizer,
+            NeuToken token,
+            IEnumerable<NeuToken> modifiers,
+            params NeuPunctuationType[] delimiters)
+        {
+            var tokens = new List<NeuToken>();
+
+            ///
+
+            foreach (var modifier in modifiers)
+            {
+                tokens.Add(modifier);
+            }
+
+            ///
+
+            tokens.Add(token);
+
+            ///
+
+            foreach (var t in tokenizer.TokenizeUntil(escapeOnNewline: true, delimiters))
+            {
+                tokens.Add(t);
+            }
+
+            ///
+
+            return tokens;
+        }
+    }
 }

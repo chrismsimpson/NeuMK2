@@ -6,6 +6,8 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
+using static System.Array;
+
 namespace Neu
 {
     public static partial class NeuParserHelpers
@@ -34,7 +36,7 @@ namespace Neu
             SourceLocation start,
             NeuToken token)
         {
-            throw new Exception();
+            return parser.ParseStatement(start, token, Empty<NeuToken>());
         }
 
         public static NeuStatement ParseStatement(
@@ -55,7 +57,7 @@ namespace Neu
 
                 default:
 
-                    throw new Exception();
+                    return parser.ParseSequenceExpr(start, token, modifiers);
             }
         }
     }

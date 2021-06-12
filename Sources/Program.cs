@@ -139,6 +139,8 @@ namespace Neu
                         {
                             var sourceFile = parser.ParseSourceFile();
 
+                            Write($"\n//\n// Filename: {file}\n//\n\n{sourceFile.ToString()}\n");
+
                             successful.Add(
                                 new TestRun(
                                     filename: file,
