@@ -18,18 +18,9 @@ namespace Neu
 
             ///
 
-            var sources = GetParent();
+            var root = GetParent(current);
 
-            if (sources == null)
-            {
-                throw new Exception();
-            }
-
-            ///
-
-            var root = GetParent(sources.FullName);
-
-            if (IsNullOrWhiteSpace(root))
+            if (root == null)
             {
                 throw new Exception();
             }
