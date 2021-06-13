@@ -20,7 +20,7 @@ namespace Neu
 
             ///
 
-            var leftParen = parser.Tokenizer.TokenizeLeftBrace();
+            var leftParen = parser.Tokenizer.TokenizeLeftParen();
 
             children.Add(leftParen);
 

@@ -56,5 +56,25 @@ namespace Neu
 
             return tokenizer.Scanner.Position();
         }
+
+        public static T? Previous<T>(
+            this Tokenizer<T> tokenizer,
+            int steps = 1)
+            where T : Token
+        {
+            var prev = tokenizer.Counter - steps;
+
+            if (prev < 0)
+            {
+                return null;
+            }
+
+            if (tokenizer.Counter <= tokenizer.Tokens.Count)
+            {
+                return tokenizer.Tokens.ElementAt(prev);
+            }
+
+            return null;
+        }
     }
 }

@@ -53,7 +53,9 @@ namespace Neu
         public static long TimeElapsed(
             this TestRun testRun)
         {
-            return (testRun.End - testRun.Start) / TicksPerMillisecond;
+            var ticks = testRun.End - testRun.Start;
+
+            return ticks / TicksPerMillisecond;
         }
     }
 
@@ -67,8 +69,8 @@ namespace Neu
     {
         public static void Main(String[] args)
         {
-            IRTests(TestSuite.Granular);
-            NeuTests(TestSuite.Granular);
+            // IRTests(TestSuite.Granular);
+            RunNeuTests(TestSuite.Granular, dumpAST: true);
         }
 
         public static void Interpret()
@@ -84,8 +86,9 @@ namespace Neu
             throw new Exception();
         }
 
-        public static void IRTests(
-            TestSuite suite)
+        public static void RunIRTests(
+            TestSuite suite,
+            bool dumpIR)
         {
             throw new Exception();
         }
@@ -111,7 +114,9 @@ namespace Neu
 
                     var files = new []
                     {
-                        $"{neuTestsDir}/0000-Arithmetic.neu"
+                        $"{neuTestsDir}/0000-Arithmetic.neu",
+                        $"{neuTestsDir}/0000-Empty.neu",
+                        $"{neuTestsDir}/0001-EmptyFunction.neu",
                     };
 
                     return files;
@@ -124,8 +129,9 @@ namespace Neu
             }
         }
 
-        public static void NeuTests(
-            TestSuite suite)
+        public static void RunNeuTests(
+            TestSuite suite,
+            bool dumpAST)
         {
             var files = GetNeuTestFiles(suite);
 
@@ -155,7 +161,10 @@ namespace Neu
                         {
                             var sourceFile = parser.ParseSourceFile();
 
-                            Write($"\n//\n// Filename: {file}\n//\n\n{sourceFile.ToString()}\n");
+                            if (dumpAST)
+                            {
+                                Write($"\n//\n// Filename: {file}\n//\n\n{sourceFile.ToString()}\n");
+                            }
 
                             successful.Add(
                                 new TestRun(

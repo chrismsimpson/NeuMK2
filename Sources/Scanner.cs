@@ -7,6 +7,7 @@ using System.Text;
 
 using static System.Char;
 using static System.DateTimeOffset;
+using static System.String;
 
 using static Neu.Scanner;
 
@@ -129,14 +130,25 @@ namespace Neu
             this Scanner scanner,
             int length)
         {
-            var maybeString = scanner.Consume(length: length).ToString();
+            var chars = scanner.Consume(length: length);
 
-            if (maybeString is String s)
+            if (chars.Length != length)
             {
-                return s;
+                throw new Exception();
             }
 
-            throw new Exception();
+            ///
+
+            var maybeString = new String(chars);
+
+            if (IsNullOrWhiteSpace(maybeString))
+            {
+                throw new Exception();
+            }
+
+            ///
+
+            return maybeString;
         }
 
         public static Char Consume(

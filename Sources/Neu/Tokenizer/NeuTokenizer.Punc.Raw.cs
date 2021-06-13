@@ -83,13 +83,13 @@ namespace Neu
         private static NeuPunctuation RawTokenizeLeftParen(
             this Tokenizer<NeuToken> tokenizer)
         {
-            return tokenizer.RawTokenizePunctuation('{', NeuPunctuationType.LeftBrace);
+            return tokenizer.RawTokenizePunctuation('(', NeuPunctuationType.LeftParen);
         }
 
         private static NeuPunctuation RawTokenizeRightParen(
             this Tokenizer<NeuToken> tokenizer)
         {
-            return tokenizer.RawTokenizePunctuation('}', NeuPunctuationType.RightBrace);
+            return tokenizer.RawTokenizePunctuation(')', NeuPunctuationType.RightParen);
         }
 
         private static NeuPunctuation RawTokenizeLeftBracket(

@@ -10,7 +10,7 @@ namespace Neu
 {
     public static partial class NeuParserHelpers
     {
-        public static NeuEnumDecl ParseEnumDecl(
+        public static NeuEnumCaseDecl ParseEnumCaseDecl(
             this NeuParser parser,
             SourceLocation start,
             IEnumerable<NeuToken> modifiers,

@@ -36,19 +36,19 @@ namespace Neu
 
         public static IEnumerable<Node> ParseModifiers(
             this NeuParser parser,
-            IEnumerable<Token> modifierTokens)
+            IEnumerable<NeuToken> modifiers)
         {
-            var modifiers = new List<Node>();
+            var declModifiers = new List<Node>();
 
             ///
 
-            foreach (var modifierToken in modifierTokens)
+            foreach (var modifier in modifiers)
             {
-                switch (modifierToken)
+                switch (modifier)
                 {
                     case NeuKeyword keyword when IsDeclModifier(keyword.KeywordType):
 
-                        modifiers.Add(new NeuDeclModifier(keyword));
+                        declModifiers.Add(new NeuDeclModifier(keyword));
 
                         break;
 
@@ -62,7 +62,7 @@ namespace Neu
 
             ///
 
-            return modifiers;
+            return declModifiers;
         }
     }
 }

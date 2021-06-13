@@ -5,7 +5,7 @@
             "name": "Neu",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
+            // "preLaunchTask": "build",
             "program": "${workspaceFolder}/Sources/bin/Debug/net5.0/Neu.dll",
             "args": [
 

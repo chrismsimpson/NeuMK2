@@ -75,19 +75,21 @@ namespace Neu
 ;
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Struct:
 
-                    throw new Exception();
+                    return parser.ParseStructDecl(start, modifiers, token);
 
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Enum:
 
-                    throw new Exception();
+                    return parser.ParseEnumDecl(start, modifiers, token);
 
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Case:
 
-                    throw new Exception();
+                    return parser.ParseEnumCaseDecl(start, modifiers, token);
 
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Using:
 
-                    throw new Exception();
+                    return parser.ParseUsingDecl(start, modifiers, token);
+
+
 
 
                 /// Control Flow
@@ -102,23 +104,23 @@ namespace Neu
 
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.For:
 
-                    throw new Exception();
+                    return parser.ParseForInStatement(start, modifiers, token);
 
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Switch:
                     
-                    throw new Exception();
+                    return parser.ParseSwitchStatement(start, modifiers, token);
 
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Break:
 
-                    throw new Exception();
+                    return parser.ParseBreakStatement(start, modifiers, token);
 
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Continue:
 
-                    throw new Exception();
-
+                    return parser.ParseContinueStatement(start, modifiers, token);
+                    
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Return:
 
-                    throw new Exception();
+                    return parser.ParseReturnStatement(start, modifiers, token);
 
                 
 
