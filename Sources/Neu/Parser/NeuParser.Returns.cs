@@ -41,7 +41,7 @@ namespace Neu
         public static NeuNode ParseReturnType(
             this NeuParser parser)
         {
-            if (parser.PeekLeftParen())
+            if (parser.Tokenizer.PeekLeftParen())
             {
                 return parser.ParseTupleType();
             }

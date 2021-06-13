@@ -13,16 +13,16 @@ namespace Neu
         public static NeuFuncDecl ParseFunctionDeclaration(
             this NeuParser parser,
             SourceLocation start,
-            NeuToken token,
-            IEnumerable<NeuToken> modifierTokens)
+            IEnumerable<NeuToken> modifiers,
+            NeuToken token)
         {
             var children = new List<Node>();
 
             ///
 
-            if (modifierTokens.Count() > 0)
+            if (modifiers.Count() > 0)
             {
-                var modifierList = parser.ParseModifierList(modifierTokens);
+                var modifierList = parser.ParseModifierList(modifiers);
 
                 children.Add(modifierList);
             }
@@ -74,7 +74,7 @@ namespace Neu
 
             ///
 
-            if (parser.PeekArrow())
+            if (parser.Tokenizer.PeekArrow())
             {
                 var returnClause = parser.ParseReturnClause();
 

@@ -242,31 +242,7 @@ namespace Neu
 
     public static partial class NeuTokenizerHelpers
     {
-        public static NeuToken? Peek(
-            this Tokenizer<NeuToken> tokenizer)
-        {
-            if (tokenizer.Counter + 1 <= tokenizer.Tokens.Count)
-            {
-                return tokenizer.Tokens.ElementAt(tokenizer.Counter);
-            }
-
-            ///
-
-            if (tokenizer.Scanner.IsEof())
-            {
-                return null;
-            }
-
-            ///
-
-            var next = tokenizer.RawNext();
-
-            tokenizer.Tokens.Add(next);
-
-            ///
-
-            return next;
-        }
+        
 
         public static NeuToken? Next(
             this Tokenizer<NeuToken> tokenizer)

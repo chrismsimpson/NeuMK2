@@ -38,14 +38,14 @@ namespace Neu
             SourceLocation start,
             NeuToken token)
         {
-            return parser.ParseStatement(start, token, Empty<NeuToken>());
+            return parser.ParseStatement(start, Empty<NeuToken>(), token);
         }
 
         public static NeuStatement ParseStatement(
             this NeuParser parser,
             SourceLocation start,
-            NeuToken token,
-            IEnumerable<NeuToken> modifiers)
+            IEnumerable<NeuToken> modifiers,
+            NeuToken token)
         {
             switch (token)
             {
@@ -60,19 +60,19 @@ namespace Neu
                         throw new Exception();
                     }
 
-                    return parser.ParseStatement(start, next, modifiers.Append(keyword));
+                    return parser.ParseStatement(start, modifiers.Append(keyword), next);
 
 
                 /// Declarations
 
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Func:
 
-                    return parser.ParseFunctionDeclaration(start, token, modifiers);
+                    return parser.ParseFunctionDeclaration(start, modifiers, token);
 
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Interface:
 
-                    throw new Exception();
-
+                    return parser.ParseInterfaceDecl(start, modifiers, token);
+;
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Struct:
 
                     throw new Exception();
@@ -94,11 +94,11 @@ namespace Neu
 
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.If:
 
-                    return parser.ParseIfStatement(start, token, modifiers);
+                    return parser.ParseIfStatement(start, modifiers, token);
 
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.While:
 
-                    return parser.ParseWhileStatement(start, token, modifiers);
+                    return parser.ParseWhileStatement(start, modifiers, token);
 
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.For:
 
@@ -130,7 +130,7 @@ namespace Neu
 
                 default:
 
-                    return parser.ParseSequenceExpr(start, token, modifiers);
+                    return parser.ParseSequenceExpr(start, modifiers, token);
             }
         }
     }

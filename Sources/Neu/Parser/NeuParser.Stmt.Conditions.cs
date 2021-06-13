@@ -37,7 +37,7 @@ namespace Neu
 
             while (!parser.IsEof())
             {
-                if (parser.PeekLeftBrace())
+                if (parser.Tokenizer.PeekLeftBrace())
                 {
                     break;
                 }
@@ -68,12 +68,7 @@ namespace Neu
 
             ///
 
-            var modifiers = new List<NeuToken>();
-
-            while (parser.PeekModifier())
-            {
-                throw new Exception();
-            }
+            var modifiers = parser.Tokenizer.TokenizeModifiers();
 
             ///
 
@@ -83,7 +78,7 @@ namespace Neu
 
             while (!parser.IsEof())
             {
-                if (parser.PeekLeftBrace())
+                if (parser.Tokenizer.PeekLeftBrace())
                 {
                     return null; // Should this be break?
                 }
@@ -106,13 +101,13 @@ namespace Neu
 
                 ///
 
-                var conditionExpr = parser.ParseConditionExpression(start, token, modifiers);
+                var conditionExpr = parser.ParseConditionExpression(start, modifiers, token);
 
                 children.Add(conditionExpr);
 
                 ///
 
-                if (parser.PeekComma())
+                if (parser.Tokenizer.PeekComma())
                 {
                     var comma = parser.Tokenizer.TokenizeComma();
 
@@ -135,8 +130,8 @@ namespace Neu
         public static NeuExpression ParseConditionExpression(
             this NeuParser parser, 
             SourceLocation start, 
-            NeuToken token,
-            IEnumerable<NeuToken> modifiers)
+            IEnumerable<NeuToken> modifiers,
+            NeuToken token)
         {
             switch (token)
             {
@@ -166,7 +161,7 @@ namespace Neu
 
                 default:
 
-                    return parser.ParseSequenceExpr(start, token, modifiers);
+                    return parser.ParseSequenceExpr(start, modifiers, token);
             }
         }
 

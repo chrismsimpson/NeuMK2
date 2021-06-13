@@ -74,7 +74,7 @@ namespace Neu
 
             while (!parser.IsEof())
             {
-                if (parser.PeekRightBrace())
+                if (parser.Tokenizer.PeekRightBrace())
                 {
                     break;
                 }
@@ -94,7 +94,7 @@ namespace Neu
 
                 ///
 
-                if (parser.PeekCase())
+                if (parser.Tokenizer.PeekCase())
                 {
                     break;
                 }
@@ -116,7 +116,7 @@ namespace Neu
 
             while (!parser.IsEof())
             {
-                if (parser.PeekRightBrace())
+                if (parser.Tokenizer.PeekRightBrace())
                 {
                     break;
                 }
@@ -162,7 +162,7 @@ namespace Neu
 
             ///
 
-            if (parser.PeekSemicolon())
+            if (parser.Tokenizer.PeekSemicolon())
             {
                 children.Add(parser.Tokenizer.TokenizeSemicolon());
             }

@@ -12,8 +12,8 @@ namespace Neu
         public static NeuIfStatement ParseIfStatement(
             this NeuParser parser,
             SourceLocation start,
-            NeuToken token,
-            IEnumerable<NeuToken> modifiers)
+            IEnumerable<NeuToken> modifiers,
+            NeuToken token)
         {
             var children = new List<Node>();
 

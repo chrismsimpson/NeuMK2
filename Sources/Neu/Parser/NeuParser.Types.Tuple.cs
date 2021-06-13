@@ -70,7 +70,7 @@ namespace Neu
 
             while (!parser.IsEof())
             {   
-                if (parser.PeekRightParen())
+                if (parser.Tokenizer.PeekRightParen())
                 {
                     break;
                 }
@@ -101,7 +101,7 @@ namespace Neu
 
             ///
 
-            if (parser.PeekRightParen())
+            if (parser.Tokenizer.PeekRightParen())
             {
                 return null;
             }

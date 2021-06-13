@@ -48,8 +48,8 @@ namespace Neu
         public static NeuExprList ParseExprList(
             this NeuParser parser,
             SourceLocation start,
-            NeuToken token,
-            IEnumerable<NeuToken> modifiers)
+            IEnumerable<NeuToken> modifiers,
+            NeuToken token)
         {
             var children = new List<Node>();
 
@@ -87,14 +87,14 @@ namespace Neu
         public static NeuSequenceExpr ParseSequenceExpr(
             this NeuParser parser,
             SourceLocation start,
-            NeuToken token,
-            IEnumerable<NeuToken> modifiers)
+            IEnumerable<NeuToken> modifiers,
+            NeuToken token)
         {
             var children = new List<Node>();
 
             ///
 
-            var exprList = parser.ParseExprList(start, token, modifiers);
+            var exprList = parser.ParseExprList(start, modifiers, token);
 
             ///
 

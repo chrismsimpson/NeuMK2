@@ -13,8 +13,8 @@ namespace Neu
         public static NeuInterfaceDecl ParseInterfaceDecl(
             this NeuParser parser,
             SourceLocation start,
-            NeuToken token,
-            IEnumerable<NeuToken> modifiers)
+            IEnumerable<NeuToken> modifiers,
+            NeuToken token)
         {
             throw new Exception();
         }
