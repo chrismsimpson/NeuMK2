@@ -8,9 +8,9 @@ using System.Collections.Generic;
 
 namespace Neu
 {
-    public partial class NeuFuncDecl : NeuDeclaration
+    public partial class NeuUsingDecl : NeuDeclaration
     {
-        public NeuFuncDecl(
+        public NeuUsingDecl(
             IEnumerable<Node> children,
             SourceLocation start,
             SourceLocation end)

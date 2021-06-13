@@ -10,7 +10,7 @@ namespace Neu
 {
     public static partial class NeuParserHelpers
     {
-        public static NeuFunctionDeclaration ParseFunctionDeclaration(
+        public static NeuFuncDecl ParseFunctionDeclaration(
             this NeuParser parser,
             SourceLocation start,
             NeuToken token,
@@ -51,7 +51,7 @@ namespace Neu
 
             ///
 
-            return new NeuFunctionDeclaration(
+            return new NeuFuncDecl(
                 children: children,
                 start: start,
                 end: parser.Position());

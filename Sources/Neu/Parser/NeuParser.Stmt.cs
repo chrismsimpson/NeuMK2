@@ -98,7 +98,7 @@ namespace Neu
 
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.While:
 
-                    throw new Exception();
+                    return parser.ParseWhileStatement(start, token, modifiers);
 
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.For:
 
