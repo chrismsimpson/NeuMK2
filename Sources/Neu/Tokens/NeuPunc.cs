@@ -24,7 +24,9 @@ namespace Neu
         Period,
 
         LessThan,
-        GreaterThan
+        GreaterThan,
+
+        Equal
     }
 
     public partial class NeuPunctuation : NeuToken

@@ -149,5 +149,11 @@ namespace Neu
         {
             return tokenizer.RawTokenizePunctuation('>', NeuPunctuationType.GreaterThan);
         }
+
+        private static NeuPunctuation RawTokenizeEqual(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizePunctuation('=', NeuPunctuationType.Equal);
+        }
     }
 }

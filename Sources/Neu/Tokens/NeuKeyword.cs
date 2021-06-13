@@ -21,6 +21,7 @@ namespace Neu
         Internal,
 
         If,
+        Else,
         While,
         For,
         In,
@@ -28,6 +29,7 @@ namespace Neu
         Switch,
         Break,
         Continue,
+        Where,
         
         Let,
         Var,

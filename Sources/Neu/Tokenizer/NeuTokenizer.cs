@@ -392,7 +392,8 @@ namespace Neu
                 case '>':
                     return tokenizer.RawTokenizeGreaterThan();
 
-                
+                case '=':
+                    return tokenizer.RawTokenizeEqual();
 
 
                 /// Keywords
@@ -406,12 +407,60 @@ namespace Neu
                 case 'c' when tokenizer.Scanner.PeekThenDelimiter(equals: "ontinue", delimitedBy: c => IsWhiteSpace(c) || c == ';'):
                     return tokenizer.RawTokenizeContinue();
 
+                case 'e' when tokenizer.Scanner.PeekThenDelimiter(equals: "lse", delimitedBy: c => IsWhiteSpace(c) || c == '{'):
+                    return tokenizer.RawTokenizeElse();
+
+                case 'e' when tokenizer.Scanner.PeekThenWhitespace(equals: "num"):
+                    return tokenizer.RawTokenizeEnum();
+
+                case 'f' when tokenizer.Scanner.PeekThenDelimiter(equals: "alse", delimitedBy: c => IsWhiteSpace(c) || c == ')' || c == ',' || c == ':'):
+                    return tokenizer.RawTokenizeFalse();
+
+                case 'f' when tokenizer.Scanner.PeekThenDelimiter(equals: "or", delimitedBy: c => IsWhiteSpace(c) || c == '(' || c == '_'):
+                    return tokenizer.RawTokenizeFor();
+
                 case 'f' when tokenizer.Scanner.PeekThenWhitespace(equals: "unc"):
                     return tokenizer.RawTokenizeFunc();
 
+                case 'i' when tokenizer.Scanner.PeekThenDelimiter(equals: "f", delimitedBy: c => IsWhiteSpace(c) || c == '('):
+                    return tokenizer.RawTokenizeIf();
+
+                case 'i' when tokenizer.Scanner.PeekThenDelimiter(equals: "n", delimitedBy: c => IsWhiteSpace(c) || c == '(' || c == '.'):
+                    return tokenizer.RawTokenizeIn();
+
+                case 'i' when tokenizer.Scanner.PeekThenWhitespace(equals: "nterface"):
+                    return tokenizer.RawTokenizeInterface();
+
+
                 
+                case 'p' when tokenizer.Scanner.PeekThenWhitespace(equals: "rivate"):
+                    return tokenizer.RawTokenizePrivate();
+
+                case 's' when tokenizer.Scanner.PeekThenWhitespace(equals: "truct"):
+                    return tokenizer.RawTokenizeStruct();
+
+                case 's' when tokenizer.Scanner.PeekThenDelimiter(equals: "witch", delimitedBy: c => IsWhiteSpace(c) || c == '('):
+                    return tokenizer.RawTokenizeSwitch();
+
+                case 't' when tokenizer.Scanner.PeekThenDelimiter(equals: "rue", delimitedBy: c => IsWhiteSpace(c) || c == ')' || c == ',' || c == ':'):
+                    return tokenizer.RawTokenizeTrue();
+
+                case 'u' when tokenizer.Scanner.PeekThenWhitespace(equals: "sing"):
+                    return tokenizer.RawTokenizeUsing();
+
+                case 'w' when tokenizer.Scanner.PeekThenDelimiter(equals: "hile", delimitedBy: c => IsWhiteSpace(c) || c == '('):
+                    return tokenizer.RawTokenizeWhile();
+
+                case 'w' when tokenizer.Scanner.PeekThenDelimiter(equals: "here", delimitedBy: c => IsWhiteSpace(c) || c == '('):
+                    return tokenizer.RawTokenizeWhere();
+
 
                 /// Identifiers
+
+                case Char c when IsIdentifierStart(c):
+                    return tokenizer.RawTokenizeIdentifier();
+
+                /// Literals
 
                 case Char c when IsNumberLiteralPart(c):
                     return tokenizer.RawTokenizeNumberLiteral(c);
