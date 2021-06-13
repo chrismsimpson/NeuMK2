@@ -37,12 +37,31 @@ namespace Neu
                 keywordType: keywordType);
         }
 
+        ///
+
+        public static NeuKeyword RawTokenizeBreak(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizeKeyword("break", NeuKeywordType.Break);
+        }
+
+        public static NeuKeyword RawTokenizeCase(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizeKeyword("case", NeuKeywordType.Case);
+        }
+
+        public static NeuKeyword RawTokenizeContinue(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizeKeyword("continue", NeuKeywordType.Continue);
+        }
+
         public static NeuKeyword RawTokenizeFunc(
             this Tokenizer<NeuToken> tokenizer)
         {
             return tokenizer.RawTokenizeKeyword("func", NeuKeywordType.Func);
         }
 
-        ///
     }
 }

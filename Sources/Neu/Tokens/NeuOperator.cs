@@ -31,7 +31,9 @@ namespace Neu
         GreaterThanOrEqualTo,
         LessThanOrEqualTo,
         LessThan,
-        GreaterThan
+        GreaterThan,
+        IncrementInto,
+        DecrementInto
     }
 
     public partial class NeuBinaryOperator : NeuOperator

@@ -86,5 +86,29 @@ namespace Neu
         {
             return tokenizer.RawTokenizeBinaryOperator('-', NeuBinaryOperatorType.Minus);
         }
+
+        private static NeuBinaryOperator RawTokenizeIncrementInto(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizeBinaryOperator("+=", NeuBinaryOperatorType.IncrementInto);
+        }
+
+        private static NeuBinaryOperator RawTokenizeDecrementInto(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizeBinaryOperator("-=", NeuBinaryOperatorType.IncrementInto);
+        }
+
+        private static NeuBinaryOperator RawTokenizeLessThanOrEqualTo(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizeBinaryOperator("<=", NeuBinaryOperatorType.LessThanOrEqualTo);
+        }
+
+        private static NeuBinaryOperator RawTokenizeGreaterThanOrEqualTo(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizeBinaryOperator(">=", NeuBinaryOperatorType.GreaterThanOrEqualTo);
+        }
     }
 }

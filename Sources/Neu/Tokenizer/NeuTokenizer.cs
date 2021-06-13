@@ -317,6 +317,43 @@ namespace Neu
                 case '/' when tokenizer.Scanner.Peek(equals: '*'):
                     return tokenizer.RawTokenizeInlineComment();
 
+                /// Pre-Operator Punctuation
+
+                case '-' when tokenizer.Scanner.Peek(equals: '>'):
+                    return tokenizer.RawTokenizeArrow();
+
+                /// Postfix Operators
+
+
+                /// Prefix Operators
+
+
+                /// Infix Operators
+
+
+                /// Binary Operators
+
+                case '=' when tokenizer.Scanner.Peek(equals: '='):
+                    return tokenizer.RawTokenizeEqualTo();
+
+                case '+' when tokenizer.Scanner.Peek(equals: '='):
+                    return tokenizer.RawTokenizeIncrementInto();
+
+                case '+':
+                    return tokenizer.RawTokenizePlus();
+
+                case '-' when tokenizer.Scanner.Peek(equals: '='):
+                    return tokenizer.RawTokenizeDecrementInto();
+
+                case '-':
+                    return tokenizer.RawTokenizeMinus();
+
+                case '<' when tokenizer.Scanner.Peek(equals: '='):
+                    return tokenizer.RawTokenizeLessThanOrEqualTo();
+
+                case '>' when tokenizer.Scanner.Peek(equals: '='):
+                    return tokenizer.RawTokenizeGreaterThanOrEqualTo();
+
                 /// Punctuation
 
                 case '(':
@@ -346,23 +383,33 @@ namespace Neu
                 case '.':
                     return tokenizer.RawTokenizePeriod();
 
+                case ',':
+                    return tokenizer.RawTokenizeComma();
+
+                case '<':
+                    return tokenizer.RawTokenizeLessThan();
+
+                case '>':
+                    return tokenizer.RawTokenizeGreaterThan();
+
                 
 
-                /// Operators
-
-                case '=' when tokenizer.Scanner.Peek(equals: '='):
-                    return tokenizer.RawTokenizeEqualTo();
-
-                case '+':
-                    return tokenizer.RawTokenizePlus();
-
-                case '-':
-                    return tokenizer.RawTokenizeMinus();
 
                 /// Keywords
 
+                case 'b' when tokenizer.Scanner.PeekThenDelimiter(equals: "reak", delimitedBy: c => IsWhiteSpace(c) || c == ';'):
+                    return tokenizer.RawTokenizeBreak();
+
+                case 'c' when tokenizer.Scanner.PeekThenWhitespace(equals: "ase"):
+                    return tokenizer.RawTokenizeCase();
+
+                case 'c' when tokenizer.Scanner.PeekThenDelimiter(equals: "ontinue", delimitedBy: c => IsWhiteSpace(c) || c == ';'):
+                    return tokenizer.RawTokenizeContinue();
+
                 case 'f' when tokenizer.Scanner.PeekThenWhitespace(equals: "unc"):
                     return tokenizer.RawTokenizeFunc();
+
+                
 
                 /// Identifiers
 

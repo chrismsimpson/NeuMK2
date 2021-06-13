@@ -126,6 +126,12 @@ namespace Neu
             return tokenizer.RawTokenizePunctuation('.', NeuPunctuationType.Colon);
         }
 
+        private static NeuPunctuation RawTokenizeComma(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizePunctuation(',', NeuPunctuationType.Comma);
+        }
+
         private static NeuPunctuation RawTokenizeArrow(
             this Tokenizer<NeuToken> tokenizer)
         {
