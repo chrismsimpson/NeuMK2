@@ -10,12 +10,19 @@ namespace Neu
     {
         LeftBrace,
         RightBrace,
+
         LeftParen,
         RightParen,
+
+        LeftBracket,
+        RightBracket,
+
         Semicolon,
         Colon,
         Comma,
         Arrow,
+        Period,
+
         LessThan,
         GreaterThan
     }

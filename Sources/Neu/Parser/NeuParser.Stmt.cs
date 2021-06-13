@@ -62,11 +62,33 @@ namespace Neu
 
                     return parser.ParseStatement(start, next, modifiers.Append(keyword));
 
+
                 /// Declarations
 
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Func:
 
                     return parser.ParseFunctionDeclaration(start, token, modifiers);
+
+                case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Interface:
+
+                    throw new Exception();
+
+                case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Struct:
+
+                    throw new Exception();
+
+                case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Enum:
+
+                    throw new Exception();
+
+                case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Case:
+
+                    throw new Exception();
+
+                case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Using:
+
+                    throw new Exception();
+
 
                 /// Control Flow
 
@@ -74,9 +96,35 @@ namespace Neu
 
                     return parser.ParseIfStatement(start, token, modifiers);
 
-                ///
+                case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.While:
+
+                    throw new Exception();
+
+                case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.For:
+
+                    throw new Exception();
+
+                case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Switch:
+                    
+                    throw new Exception();
+
+                case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Break:
+
+                    throw new Exception();
+
+                case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Continue:
+
+                    throw new Exception();
+
+                case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Return:
+
+                    throw new Exception();
 
                 
+
+                ///
+
+
 
                 ///
 

@@ -9,12 +9,26 @@ namespace Neu
     public enum NeuKeywordType
     {
         Func,
+        Struct,
+        Interface,
+        Enum,
         Return,
         Case,
+        Using,
+
         Private,
         Public,
         Internal,
+
         If,
+        While,
+        For,
+        In,
+        Is,
+        Switch,
+        Break,
+        Continue,
+        
         Let,
         Var,
         True,

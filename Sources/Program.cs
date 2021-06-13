@@ -67,18 +67,33 @@ namespace Neu
     {
         public static void Main(String[] args)
         {
-            IRTests();
+            IRTests(TestSuite.Granular);
             NeuTests(TestSuite.Granular);
         }
 
-        public static void IRTests()
+        public static void Interpret()
         {
 
         }
 
         ///
 
-        public static IEnumerable<String> GetNeuTestFiles(TestSuite suite)
+        public static IEnumerable<String> GetIRTestFiles(
+            TestSuite suite)
+        {
+            throw new Exception();
+        }
+
+        public static void IRTests(
+            TestSuite suite)
+        {
+            throw new Exception();
+        }
+
+        ///
+
+        public static IEnumerable<String> GetNeuTestFiles(
+            TestSuite suite)
         {
             var neuTestsDir = GetNeuTestsDirectory();
 
@@ -109,7 +124,8 @@ namespace Neu
             }
         }
 
-        public static void NeuTests(TestSuite suite)
+        public static void NeuTests(
+            TestSuite suite)
         {
             var files = GetNeuTestFiles(suite);
 
@@ -180,6 +196,8 @@ namespace Neu
 
             PrintStats(successful, failed, unsupported);
         }
+
+        ///
 
         public static void PrintStats(
             IEnumerable<TestRun> successful,

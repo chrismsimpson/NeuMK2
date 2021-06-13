@@ -309,6 +309,45 @@ namespace Neu
 
             switch (nextChar)
             {
+                /// Comments
+
+                case '/' when tokenizer.Scanner.Peek(equals: '/'):
+                    return tokenizer.RawTokenizeLineEndComment();
+
+                case '/' when tokenizer.Scanner.Peek(equals: '*'):
+                    return tokenizer.RawTokenizeInlineComment();
+
+                /// Punctuation
+
+                case '(':
+                    return tokenizer.RawTokenizeLeftParen();
+
+                case ')':
+                    return tokenizer.RawTokenizeRightParen();
+
+                case '{':
+                    return tokenizer.RawTokenizeLeftBrace();
+
+                case '}':
+                    return tokenizer.RawTokenizeRightBrace();
+
+                case '[':
+                    return tokenizer.RawTokenizeLeftBracket();
+
+                case ']':
+                    return tokenizer.RawTokenizeRightBracket();
+
+                case ':':
+                    return tokenizer.RawTokenizeColon();
+
+                case ';':
+                    return tokenizer.RawTokenizeSemicolon();
+
+                case '.':
+                    return tokenizer.RawTokenizePeriod();
+
+                
+
                 /// Operators
 
                 case '=' when tokenizer.Scanner.Peek(equals: '='):
@@ -319,20 +358,6 @@ namespace Neu
 
                 case '-':
                     return tokenizer.RawTokenizeMinus();
-
-                /// Punctuation
-
-                case '{':
-                    return tokenizer.RawTokenizeLeftBrace();
-
-                case '}':
-                    return tokenizer.RawTokenizeRightBrace();
-
-                case ':':
-                    return tokenizer.RawTokenizeColon();
-
-                case ';':
-                    return tokenizer.RawTokenizeSemicolon();
 
                 /// Keywords
 
