@@ -122,8 +122,6 @@ namespace Neu
 
                     return parser.ParseReturnStatement(start, modifiers, token);
 
-                
-
                 ///
 
 
