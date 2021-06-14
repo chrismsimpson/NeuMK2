@@ -19,63 +19,41 @@ using static Neu.ConsoleHelpers;
 
 namespace Neu
 {
-    public class TestRun
-    {
-        public String Filename { get; init; }
-
-        public long Start { get; init; }
-
-        public long End { get; init; }
-
-        ///
-
-        public TestRun(
-            String filename,
-            long start,
-            long end)
-        {
-            this.Filename = filename;
-            this.Start = start;
-            this.End = end;
-        }
-
-        public TestRun(
-            String filename)
-        {
-            this.Filename = filename;
-            this.Start = UtcNow.UtcTicks;
-            this.End = this.Start;
-        }
-    }
-
-    public static partial class TestRunHelpers
-    {
-        public static long TimeElapsed(
-            this TestRun testRun)
-        {
-            var ticks = testRun.End - testRun.Start;
-
-            return ticks / TicksPerMillisecond;
-        }
-    }
-
-    public enum TestSuite
-    {
-        All,
-        Granular
-    }
-
     public static partial class Program
     {
         public static void Main(String[] args)
         {
             // IRTests(TestSuite.Granular);
-            RunNeuTests(TestSuite.Granular, dumpAST: true);
+            // RunNeuTests(TestSuite.Granular, dumpAST: true);
+
+            ///
+
+            var neuTestsDir = GetNeuTestsDirectory();
+
+            // var neuFile = $"{neuTestsDir}/0000-Arithmetic.neu";
+            var neuFile = $"{neuTestsDir}/0002-FuncCallExpr.neu";
+
+            InterpretNeuFile(file: neuFile);
         }
 
-        public static void Interpret()
+        public static void InterpretNeuFile(
+            String file)
         {
+            var parser = NeuParser.FromFile(file);
 
+            ///
+
+            var sourceFile = parser.ParseSourceFile();
+
+            ///
+
+            Write($"\n//\n// Filename: {file}\n//\n\n{sourceFile.ToString()}\n");
+
+            // var interpreter = new NeuInterpreter();
+
+            // var result = interpreter.Run(sourceFile);
+
+            // WriteLine(2, $"{result}");
         }
 
         ///

@@ -511,6 +511,7 @@ namespace Neu
             this Tokenizer<NeuToken> tokenizer,
             NeuToken token,
             IEnumerable<NeuToken> modifiers,
+            bool escapeOnNewline,
             params NeuPunctuationType[] delimiters)
         {
             var tokens = new List<NeuToken>();
@@ -528,7 +529,7 @@ namespace Neu
 
             ///
 
-            foreach (var t in tokenizer.TokenizeUntil(escapeOnNewline: true, delimiters))
+            foreach (var t in tokenizer.TokenizeUntil(escapeOnNewline: escapeOnNewline, delimiters))
             {
                 tokens.Add(t);
             }

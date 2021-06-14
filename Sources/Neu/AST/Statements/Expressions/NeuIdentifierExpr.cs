@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 namespace Neu
 {
-    public partial class NeuNode : Node
+    public partial class NeuIdentifierExpr : NeuExpression
     {
-        public NeuNode(
+        public NeuIdentifierExpr(
             IEnumerable<Node> children,
             SourceLocation start,
             SourceLocation end)

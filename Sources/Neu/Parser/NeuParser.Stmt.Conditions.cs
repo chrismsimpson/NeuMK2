@@ -161,7 +161,16 @@ namespace Neu
 
                 default:
 
-                    return parser.ParseSequenceExpr(start, modifiers, token);
+                    return parser.ParseSequenceExpr(
+                        start: start, 
+                        modifiers: modifiers, 
+                        token: token,
+                        escapeOnNewline: true,
+                        // delimiters:
+                            NeuPunctuationType.Comma, 
+                            NeuPunctuationType.Colon, 
+                            NeuPunctuationType.RightParen,
+                            NeuPunctuationType.LeftBrace);
             }
         }
 

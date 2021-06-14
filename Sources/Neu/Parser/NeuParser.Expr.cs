@@ -11,8 +11,6 @@ namespace Neu
 {
     public static partial class NeuParserHelpers
     {
-
-
         public static NeuExpression ParseExpression(
             this NeuParser parser,
             NeuToken token)
@@ -34,6 +32,12 @@ namespace Neu
                 case NeuPunctuation punc when IsBinaryOperator(punc):
 
                     return parser.ParseBinaryOperator(punc);
+
+                ///
+
+                case NeuIdentifier identifier:
+
+                    return parser.ParseIdentifier(identifier);
                     
                 ///
 
@@ -49,21 +53,15 @@ namespace Neu
             this NeuParser parser,
             SourceLocation start,
             IEnumerable<NeuToken> modifiers,
-            NeuToken token)
+            NeuToken token,
+            bool escapeOnNewline,
+            params NeuPunctuationType[] delimiters)
         {
             var children = new List<Node>();
 
             ///
 
-            var escapes = new []
-            {
-                NeuPunctuationType.Comma, 
-                NeuPunctuationType.Colon, 
-                NeuPunctuationType.RightParen,
-                NeuPunctuationType.LeftBrace
-            };
-
-            var tokens = parser.Tokenizer.Tokenize(token, modifiers, escapes);
+            var tokens = parser.Tokenizer.Tokenize(token, modifiers, escapeOnNewline, delimiters);
             
             ///
 
@@ -80,42 +78,6 @@ namespace Neu
                 children: children,
                 start: start,
                 end: parser.Position());
-        }
-
-        ///
-
-        public static NeuSequenceExpr ParseSequenceExpr(
-            this NeuParser parser,
-            SourceLocation start,
-            IEnumerable<NeuToken> modifiers,
-            NeuToken token)
-        {
-            var children = new List<Node>();
-
-            ///
-
-            var exprList = parser.ParseExprList(start, modifiers, token);
-
-            ///
-
-            children.Add(exprList);
-
-            ///
-
-            return new NeuSequenceExpr(
-                children: children,
-                start: start,
-                end: parser.Position());
-        }
-
-        ///
-        
-        public static NeuTupleExpr ParseTupleExpr(
-            this NeuParser parser, 
-            SourceLocation start, 
-            NeuToken token)
-        {
-            throw new Exception();
         }
     }
 }
