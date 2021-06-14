@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 namespace Neu
 {
-    public partial class NeuFuncParamList : NeuNode
+    public partial class NeuWhereClause : NeuNode
     {
-        public NeuFuncParamList(
+        public NeuWhereClause(
             IEnumerable<Node> children,
             SourceLocation start,
             SourceLocation end)

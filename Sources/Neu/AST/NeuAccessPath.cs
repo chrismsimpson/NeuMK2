@@ -7,18 +7,18 @@ using System.Collections.Generic;
 
 namespace Neu
 {
-    public partial class NeuFuncParam : NeuNode
+    public partial class NeuAccessPath : NeuNode
     {
-        public NeuFuncParam(
+        public NeuAccessPath(
             IEnumerable<Node> children,
             SourceLocation start,
             SourceLocation end)
             : base(children, start, end) { }
     }
-    
-    public partial class NeuFuncParamList : NeuNode
+
+    public partial class NeuAccessPathComponent : NeuNode
     {
-        public NeuFuncParamList(
+        public NeuAccessPathComponent(
             IEnumerable<Node> children,
             SourceLocation start,
             SourceLocation end)
