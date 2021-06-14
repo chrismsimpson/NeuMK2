@@ -16,6 +16,19 @@ namespace Neu
             : base(children, start, end) { }
     }
 
+    ///
+
+    public partial class NeuBooleanLiteralExpr : NeuLiteralExpr
+    {
+        public NeuBooleanLiteralExpr(
+            IEnumerable<Node> children,
+            SourceLocation start,
+            SourceLocation end)
+            : base(children, start, end) { }
+    }
+
+    ///
+
     public partial class NeuFloatLiteralExpr : NeuLiteralExpr
     {
         public NeuFloatLiteralExpr(
@@ -34,6 +47,8 @@ namespace Neu
             : base(children, start, end) { }
     }
 
+    ///
+
     public partial class NeuStringLiteralExpr : NeuLiteralExpr
     {
         public NeuStringLiteralExpr(
@@ -43,13 +58,21 @@ namespace Neu
             : base(children, start, end) { }
     }
 
-    public partial class NeuBooleanLiteralExpr : NeuLiteralExpr
+    public partial class NeuStringLiteralSegments : NeuNode
     {
-        public NeuBooleanLiteralExpr(
+        public NeuStringLiteralSegments(
             IEnumerable<Node> children,
             SourceLocation start,
             SourceLocation end)
             : base(children, start, end) { }
     }
 
+    public partial class NeuStringSegment : NeuNode
+    {
+        public NeuStringSegment(
+            IEnumerable<Node> children,
+            SourceLocation start,
+            SourceLocation end)
+            : base(children, start, end) { }
+    }
 }

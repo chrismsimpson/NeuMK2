@@ -182,7 +182,7 @@ namespace Neu
             throw new Exception();
         }
 
-        public static NeuParseMatchingPatternCondition ParseMatchingPatternCondition(
+        public static NeuMatchingPatternCondition ParseMatchingPatternCondition(
             this NeuParser parser,
             SourceLocation start,
             NeuToken token)

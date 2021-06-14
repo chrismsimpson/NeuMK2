@@ -7,31 +7,30 @@ using System.Collections.Generic;
 
 namespace Neu
 {
-    public partial class NeuCondition : NeuExpression
+    public partial class NeuMemberDeclBlock : Node
     {
-        public NeuCondition(
+        public NeuMemberDeclBlock(
             IEnumerable<Node> children,
             SourceLocation start,
             SourceLocation end)
             : base(children, start, end) { }
     }
 
-    public partial class NeuOptionalBindingCondition : NeuCondition
+    public partial class NeuMemberDeclList : NeuNode
     {
-        public NeuOptionalBindingCondition(
+        public NeuMemberDeclList(
             IEnumerable<Node> children,
             SourceLocation start,
             SourceLocation end)
             : base(children, start, end) { }
     }
 
-    public partial class NeuMatchingPatternCondition : NeuCondition
+    public partial class NeuMemberDeclListItem : NeuNode
     {
-        public NeuMatchingPatternCondition(
+        public NeuMemberDeclListItem(
             IEnumerable<Node> children,
             SourceLocation start,
             SourceLocation end)
             : base(children, start, end) { }
     }
-
 }
