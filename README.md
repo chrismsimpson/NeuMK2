@@ -16,14 +16,23 @@ struct MyType {
 enum MyEnum {
 
     case myCase
+    case anotherCase(myParam: ParamType)
 }
 ```
 
 ## Interfaces
 
 ```
-interface IInterface {
+interface IMyInterface {
 
+}
+```
+
+```
+extend MyType {
+    var body: some IMyInterface {
+        ...
+    }
 }
 ```
 
