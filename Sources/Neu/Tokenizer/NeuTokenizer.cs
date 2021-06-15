@@ -236,6 +236,109 @@ namespace Neu
                     return false;
             }
         }
+
+        ///
+
+        public static bool IsExprListDelimiter(
+            NeuToken token)
+        {
+            switch (token)
+            {
+                case NeuPunctuation p:
+                    return IsExprListDelimiter(p);
+
+                ///
+
+                default:
+                    return false;
+            }
+        }
+        
+
+        public static bool IsExprListDelimiter(
+            NeuPunctuation punc)
+        {
+            switch (punc.PunctuationType)
+            {
+                case NeuPunctuationType.Semicolon:
+                case NeuPunctuationType.Comma:
+
+                    return true;
+
+                ///
+
+                default:
+
+                    return false;
+            }
+        }
+
+        ///
+        
+        public static bool IsTupleExprElementDelimiter(
+            NeuToken token)
+        {
+            switch (token)
+            {
+                case NeuPunctuation p:
+                    return IsTupleExprElementDelimiter(p);
+
+                ///
+
+                default:
+                    return false;
+            }
+        }
+
+
+        public static bool IsTupleExprElementDelimiter(
+            NeuPunctuation punc)
+        {
+            switch (punc.PunctuationType)
+            {
+                case NeuPunctuationType.Comma:
+                case NeuPunctuationType.RightParen:
+                    return true;
+
+                ///
+                
+                default:
+                    return false;
+            }
+        }
+
+        public static bool IsExprDelimiter(
+            NeuToken token)
+        {
+            switch (token)
+            {
+                case NeuPunctuation p:
+                    return IsExprDelimiter(p);
+
+                ///
+                
+                default:
+                    return false;
+            }
+        }
+
+        public static bool IsExprDelimiter(
+            NeuPunctuation punc)
+        {
+            switch (punc.PunctuationType)
+            {
+                case NeuPunctuationType.Comma:
+                case NeuPunctuationType.RightParen:
+                case NeuPunctuationType.Semicolon:
+                    return true;
+
+                ///
+
+                default:
+                    return false;
+            }
+
+        }
     }
 
     ///

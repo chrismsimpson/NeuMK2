@@ -161,16 +161,8 @@ namespace Neu
 
                 default:
 
-                    return parser.ParseSequenceExpr(
-                        start: start, 
-                        modifiers: modifiers, 
-                        token: token,
-                        escapeOnNewline: true,
-                        // delimiters:
-                            NeuPunctuationType.Comma, 
-                            NeuPunctuationType.Colon, 
-                            NeuPunctuationType.RightParen,
-                            NeuPunctuationType.LeftBrace);
+                    throw new Exception();
+                    // return parser.ParseExpression(start, modifiers, token);
             }
         }
 
@@ -188,8 +180,30 @@ namespace Neu
             NeuToken token)
         {
             throw new Exception();
+            // var children = new List<Node>();
+
+            // ///
+
+            // children.Add(token);
+
+            // ///
+
+            // var exprPattern = parser.ParseExprPattern();
+
+            // children.Add(exprPattern);
+
+            // ///
+
+            // var initClause = parser.ParseInitClause();
+
+            // children.Add(initClause);
+
+            // ///
+
+            // return new NeuMatchingPatternCondition(
+            //     children: children,
+            //     start: start,
+            //     end: parser.Position());
         }
-
-
     }
 }

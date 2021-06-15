@@ -123,7 +123,7 @@ namespace Neu
         private static NeuPunctuation RawTokenizePeriod(
             this Tokenizer<NeuToken> tokenizer)
         {
-            return tokenizer.RawTokenizePunctuation('.', NeuPunctuationType.Colon);
+            return tokenizer.RawTokenizePunctuation('.', NeuPunctuationType.Period);
         }
 
         private static NeuPunctuation RawTokenizeComma(

@@ -9,40 +9,14 @@ namespace Neu
 {
     public static partial class NeuParserHelpers
     {
-        public static NeuExpression ParseIdentifier(
+        public static NeuIdentifierExpr ParseIdentifierExpr(
             this NeuParser parser,
             NeuIdentifier identifier)
         {
-            switch (parser.Tokenizer.Peek())
-            {
-                case NeuPunctuation p when p.PunctuationType == NeuPunctuationType.LeftParen:
-
-                    // function call
-
-                    throw new Exception();
-
-                ///
-
-                case NeuPunctuation p when p.PunctuationType == NeuPunctuationType.Equal:
-
-                    // assignment
-
-                    throw new Exception();
-
-                ///
-
-                case NeuPunctuation p when p.PunctuationType == NeuPunctuationType.Period:
-
-                    // member access
-
-                    return parser.ParseMemberAccess(identifier);
-
-                ///
-                
-                default:
-
-                    throw new Exception();
-            }
+            return new NeuIdentifierExpr(
+                children: new Node[] { identifier },
+                start: identifier.Start,
+                end: identifier.End);
         }
     }
 }

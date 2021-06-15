@@ -89,6 +89,22 @@ namespace Neu
 
                     return parser.ParseUsingDecl(start, modifiers, token);
 
+                case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Module:
+
+                    return parser.ParseModuleDecl(start, modifiers, token);
+
+                case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Namespace:
+
+                    return parser.ParseNamespaceDecl(start, modifiers, token);
+
+                case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Extend:
+
+                    return parser.ParseExtendDecl(start, modifiers, token);
+
+                case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Alias:
+
+                    return parser.ParseAliasDecl(start, modifiers, token);
+
 
 
 
@@ -122,7 +138,8 @@ namespace Neu
 
                     return parser.ParseReturnStatement(start, modifiers, token);
 
-                ///
+
+
 
 
 
@@ -130,16 +147,7 @@ namespace Neu
 
                 default:
 
-                    return parser.ParseSequenceExpr(
-                        start: start, 
-                        modifiers: modifiers, 
-                        token: token, 
-                        escapeOnNewline: true,
-                        // delimiters:
-                            NeuPunctuationType.Comma, 
-                            NeuPunctuationType.Colon, 
-                            NeuPunctuationType.RightParen,
-                            NeuPunctuationType.LeftBrace);
+                    return parser.ParseExpression(start, modifiers, token);
             }
         }
     }

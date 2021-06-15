@@ -15,6 +15,10 @@ namespace Neu
         Return,
         Case,
         Using,
+        Module,
+        Namespace,
+        Extend,
+        Alias,
 
         Private,
         Public,

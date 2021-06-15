@@ -12,9 +12,22 @@ namespace Neu
     public static partial class NeuParserHelpers
     {
         public static NeuAssignmentExpr ParseAssignmentExpr(
-            this NeuParser parser)
+            this NeuParser parser,
+            SourceLocation start,
+            IEnumerable<NeuToken> modifiers,
+            NeuPunctuation punc)
         {
-            throw new Exception();
+            if (punc.PunctuationType != NeuPunctuationType.Equal)
+            {
+                throw new Exception();
+            }
+
+            ///
+
+            return new NeuAssignmentExpr(
+                children: new Node[] { punc },
+                start: start,
+                end: parser.Position());
         }
     }
 }

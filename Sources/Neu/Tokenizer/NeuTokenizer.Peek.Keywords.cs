@@ -30,7 +30,6 @@ namespace Neu
             return tokenizer.PeekKeyword(NeuKeywordType.Case);
         }
 
-
         public static bool PeekModifier(
             this Tokenizer<NeuToken> tokenizer)
         {
@@ -49,6 +48,18 @@ namespace Neu
 
                     return false;
             }
+        }
+
+        public static bool PeekElse(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.PeekKeyword(NeuKeywordType.Else);
+        }
+
+        public static bool PeekIf(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.PeekKeyword(NeuKeywordType.If);
         }
     }
 }

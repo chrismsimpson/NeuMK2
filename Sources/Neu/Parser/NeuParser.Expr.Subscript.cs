@@ -5,13 +5,11 @@
 using System;
 using System.Collections.Generic;
 
-using static Neu.NeuTokenizer;
-
 namespace Neu
 {
     public static partial class NeuParserHelpers
     {
-        public static NeuFuncCallExpr ParseFuncCallExpr(
+        public static NeuSubscriptExpr ParseSubscriptExpr(
             this NeuParser parser,
             SourceLocation start,
             IEnumerable<NeuToken> modifiers,
@@ -25,9 +23,9 @@ namespace Neu
 
             ///
 
-            var leftParen = parser.Tokenizer.TokenizeLeftParen();
+            var leftBracket = parser.Tokenizer.TokenizeLeftBrace();
 
-            children.Add(leftParen);
+            children.Add(leftBracket);
 
             ///
 
@@ -37,16 +35,17 @@ namespace Neu
 
             ///
 
-            var rightParen = parser.Tokenizer.TokenizeRightParen();
+            var rightBracket = parser.Tokenizer.TokenizeRightBracket();
 
-            children.Add(rightParen);
+            children.Add(rightBracket);
 
             ///
 
-            return new NeuFuncCallExpr(
+            return new NeuSubscriptExpr(
                 children: children,
                 start: start,
                 end: parser.Position());
         }
     }
+     
 }

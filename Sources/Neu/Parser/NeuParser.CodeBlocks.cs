@@ -164,6 +164,8 @@ namespace Neu
 
             if (parser.Tokenizer.PeekSemicolon())
             {
+                // TODO: Change this into a more generic trailing arg?
+
                 children.Add(parser.Tokenizer.TokenizeSemicolon());
             }
 

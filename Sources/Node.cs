@@ -32,54 +32,54 @@ namespace Neu
     
 
 
-    public partial class Node
-    {
-        public override String ToString()
-        {
-            return this.ToString(indent: 0);
-        }
+    // public partial class Node
+    // {
+    //     public override String ToString()
+    //     {
+    //         return this.ToString(indent: 0);
+    //     }
 
-        public String ToString(
-            int indent)
-        {
-            var i = Indent(indent);
+    //     public String ToString(
+    //         int indent)
+    //     {
+    //         var i = Indent(indent);
 
-            var t = this.GetType();
+    //         var t = this.GetType();
 
-            var sb = new StringBuilder();
+    //         var sb = new StringBuilder();
 
-            if (this is Token tok)
-            {
-                var sourceTrimmed = tok.Source.Trim();
+    //         if (this is Token tok)
+    //         {
+    //             var sourceTrimmed = tok.Source.Trim();
 
-                sb.Append($"{i}{sourceTrimmed}");
-            }
-            else
-            {
-                sb.Append($"{i}{t.Name}");
-            }
+    //             sb.Append($"{i}{sourceTrimmed}");
+    //         }
+    //         else
+    //         {
+    //             sb.Append($"{i}{t.Name}");
+    //         }
             
-            foreach (var c in this.Children)
-            {
-                sb.Append('\n');
+    //         foreach (var c in this.Children)
+    //         {
+    //             sb.Append('\n');
 
-                sb.Append(c.ToString(indent + 1));
-            }
+    //             sb.Append(c.ToString(indent + 1));
+    //         }
 
-            return sb.ToString();
-        }
+    //         return sb.ToString();
+    //     }
 
-        public static String Indent(
-            int indent)
-        {
-            var sb = new StringBuilder();
+    //     public static String Indent(
+    //         int indent)
+    //     {
+    //         var sb = new StringBuilder();
 
-            for (var i = 0; i < indent; i++)
-            {
-                sb.Append(" ");
-            }
+    //         for (var i = 0; i < indent; i++)
+    //         {
+    //             sb.Append(" ");
+    //         }
 
-            return sb.ToString();
-        }
-    }
+    //         return sb.ToString();
+    //     }
+    // }
 }

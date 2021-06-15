@@ -17,213 +17,246 @@ using static System.DateTimeOffset;
 using static Neu.PathHelpers;
 using static Neu.ConsoleHelpers;
 
+using static Neu.TestRunner;
+
 namespace Neu
 {
     public static partial class Program
     {
-        public static void Main(String[] args)
+        public static void Main(
+            String[] args)
         {
-            // IRTests(TestSuite.Granular);
-            // RunNeuTests(TestSuite.Granular, dumpAST: true);
-
-            ///
-
-            var neuTestsDir = GetNeuTestsDirectory();
-
-            // var neuFile = $"{neuTestsDir}/0000-Arithmetic.neu";
-            var neuFile = $"{neuTestsDir}/0002-FuncCallExpr.neu";
-
-            InterpretNeuFile(file: neuFile);
+            RunTests();
         }
 
-        public static void InterpretNeuFile(
-            String file)
+        public static void RunTests()
         {
-            var parser = NeuParser.FromFile(file);
-
-            ///
-
-            var sourceFile = parser.ParseSourceFile();
-
-            ///
-
-            Write($"\n//\n// Filename: {file}\n//\n\n{sourceFile.ToString()}\n");
-
-            // var interpreter = new NeuInterpreter();
-
-            // var result = interpreter.Run(sourceFile);
-
-            // WriteLine(2, $"{result}");
-        }
-
-        ///
-
-        public static IEnumerable<String> GetIRTestFiles(
-            TestSuite suite)
-        {
-            throw new Exception();
-        }
-
-        public static void RunIRTests(
-            TestSuite suite,
-            bool dumpIR)
-        {
-            throw new Exception();
-        }
-
-        ///
-
-        public static IEnumerable<String> GetNeuTestFiles(
-            TestSuite suite)
-        {
-            var neuTestsDir = GetNeuTestsDirectory();
-
-            ///
-
-            switch (suite)
+            var runners = new TestRunner[]
             {
-                case TestSuite.All:
-
-                    return GetFiles(neuTestsDir);
-
-                ///
-
-                case TestSuite.Granular:
-
-                    var files = new []
-                    {
-                        $"{neuTestsDir}/0000-Arithmetic.neu",
-                        $"{neuTestsDir}/0000-Empty.neu",
-                        $"{neuTestsDir}/0001-EmptyFunction.neu",
-                    };
-
-                    return files;
-
-                ///
-
-                default:
-
-                    throw new Exception();
-            }
-        }
-
-        public static void RunNeuTests(
-            TestSuite suite,
-            bool dumpAST)
-        {
-            var files = GetNeuTestFiles(suite);
+                new NeuTestRunner(
+                    dumpAST: true,
+                    NeuTestSuite.Parsing, 
+                    NeuTestSuite.Interpreting)
+            };
 
             ///
 
-            var successful = new List<TestRun>();
-            var failed = new List<TestRun>();
-            var unsupported = new List<TestRun>();
+            var tests = new List<TestRun>();
 
-            ///
-
-            foreach (var file in files.OrderBy(x => x))
+            foreach (var runner in runners)
             {
-                var extension = GetExtension(file);
-
-                switch (extension)
+                foreach (var testRun in runner.Run())
                 {
-                    case ".neu":
-
-                        var parser = NeuParser.FromFile(file);
-
-                        ///
-
-                        var start = UtcNow.UtcTicks;
-
-                        try
-                        {
-                            var sourceFile = parser.ParseSourceFile();
-
-                            if (dumpAST)
-                            {
-                                Write($"\n//\n// Filename: {file}\n//\n\n{sourceFile.ToString()}\n");
-                            }
-
-                            successful.Add(
-                                new TestRun(
-                                    filename: file,
-                                    start: start,
-                                    end: UtcNow.UtcTicks));
-                        }
-                        catch
-                        {
-                            failed.Add(
-                                new TestRun(
-                                    filename: file,
-                                    start: start,
-                                    end: UtcNow.UtcTicks));
-                        }
-
-                        break;
-
-                    ///
-
-                    default:
-
-                        unsupported.Add(
-                            new TestRun(
-                                filename: file));
-
-                        break;
+                    tests.Add(testRun);
                 }
             }
 
-            ///
-
-            WriteLine($"\n//");
-            WriteLine($"// Neu stats:");
-            WriteLine($"//\n");
-
-            ///
-
-            PrintStats(successful, failed, unsupported);
+            PrintTestStatistics(tests);
         }
 
-        ///
+        // public static void Main(String[] args)
+        // {
+        //     // IRTests(TestSuite.Granular);
+        //     // RunNeuTests(TestSuite.Granular, dumpAST: true);
 
-        public static void PrintStats(
-            IEnumerable<TestRun> successful,
-            IEnumerable<TestRun> failed,
-            IEnumerable<TestRun> unsupported)
-        {
-            if (successful.Count() > 0)
-            {
-                WriteGreenLine(2, $"Successful: {successful.Count()} ({successful.Sum(x => x.TimeElapsed())} ms)");
+        //     ///
 
-                foreach (var s in successful)
-                {
-                    WriteGreenLine(4, $"{s.Filename} ({s.TimeElapsed()} ms)");
-                }
-            }
+        //     var neuTestsDir = GetNeuTestsDirectory();
 
-            ///
+        //     // var neuFile = $"{neuTestsDir}/0000-Arithmetic.neu";
+        //     var neuFile = $"{neuTestsDir}/0002-FuncCallExpr.neu";
 
-            if (failed.Count() > 0)
-            {
-                WriteRedLine(2, $"Failed: {failed.Count()}");
+        //     InterpretNeuFile(file: neuFile);
+        // }
 
-                foreach (var f in failed)
-                {
-                    WriteRedLine(4, $"{f.Filename} ({f.TimeElapsed()} ms)");
-                }
-            }
+        // public static void InterpretNeuFile(
+        //     String file)
+        // {
+        //     var parser = NeuParser.FromFile(file);
 
-            ///
+        //     ///
 
-            if (unsupported.Count() > 0)
-            {
-                WriteYellowLine(2, $"Unsupported: {unsupported.Count()}");
+        //     var sourceFile = parser.ParseSourceFile();
 
-                foreach (var u in unsupported)
-                {
-                    WriteYellowLine(4, $"{u}");
-                }
-            }
-        }
+        //     ///
+
+        //     Write($"\n//\n// Filename: {file}\n//\n\n{sourceFile.ToString()}\n");
+
+        //     // var interpreter = new NeuInterpreter();
+
+        //     // var result = interpreter.Run(sourceFile);
+
+        //     // WriteLine(2, $"{result}");
+        // }
+
+        // ///
+
+        // public static IEnumerable<String> GetIRTestFiles(
+        //     TestSuite suite)
+        // {
+        //     throw new Exception();
+        // }
+
+        // public static void RunIRTests(
+        //     TestSuite suite,
+        //     bool dumpIR)
+        // {
+        //     throw new Exception();
+        // }
+
+        // ///
+
+        // public static IEnumerable<String> GetNeuTestFiles(
+        //     TestSuite suite)
+        // {
+        //     var neuTestsDir = GetNeuTestsDirectory();
+
+        //     ///
+
+        //     switch (suite)
+        //     {
+        //         case TestSuite.All:
+
+        //             return GetFiles(neuTestsDir);
+
+        //         ///
+
+        //         case TestSuite.Granular:
+
+        //             var files = new []
+        //             {
+        //                 $"{neuTestsDir}/0000-Arithmetic.neu",
+        //                 $"{neuTestsDir}/0000-Empty.neu",
+        //                 $"{neuTestsDir}/0001-EmptyFunction.neu",
+        //             };
+
+        //             return files;
+
+        //         ///
+
+        //         default:
+
+        //             throw new Exception();
+        //     }
+        // }
+
+        // public static void RunNeuTests(
+        //     TestSuite suite,
+        //     bool dumpAST)
+        // {
+        //     var files = GetNeuTestFiles(suite);
+
+        //     ///
+
+        //     var successful = new List<TestRun>();
+        //     var failed = new List<TestRun>();
+        //     var unsupported = new List<TestRun>();
+
+        //     ///
+
+        //     foreach (var file in files.OrderBy(x => x))
+        //     {
+        //         var extension = GetExtension(file);
+
+        //         switch (extension)
+        //         {
+        //             case ".neu":
+
+        //                 var parser = NeuParser.FromFile(file);
+
+        //                 ///
+
+        //                 var start = UtcNow.UtcTicks;
+
+        //                 try
+        //                 {
+        //                     var sourceFile = parser.ParseSourceFile();
+
+        //                     if (dumpAST)
+        //                     {
+        //                         Write($"\n//\n// Filename: {file}\n//\n\n{sourceFile.ToString()}\n");
+        //                     }
+
+        //                     successful.Add(
+        //                         new TestRun(
+        //                             filename: file,
+        //                             start: start,
+        //                             end: UtcNow.UtcTicks));
+        //                 }
+        //                 catch
+        //                 {
+        //                     failed.Add(
+        //                         new TestRun(
+        //                             filename: file,
+        //                             start: start,
+        //                             end: UtcNow.UtcTicks));
+        //                 }
+
+        //                 break;
+
+        //             ///
+
+        //             default:
+
+        //                 unsupported.Add(
+        //                     new TestRun(
+        //                         filename: file));
+
+        //                 break;
+        //         }
+        //     }
+
+        //     ///
+
+        //     WriteLine($"\n//");
+        //     WriteLine($"// Neu stats:");
+        //     WriteLine($"//\n");
+
+        //     ///
+
+        //     PrintStats(successful, failed, unsupported);
+        // }
+
+        // ///
+
+        // public static void PrintStats(
+        //     IEnumerable<TestRun> successful,
+        //     IEnumerable<TestRun> failed,
+        //     IEnumerable<TestRun> unsupported)
+        // {
+        //     if (successful.Count() > 0)
+        //     {
+        //         WriteGreenLine(2, $"Successful: {successful.Count()} ({successful.Sum(x => x.TimeElapsed())} ms)");
+
+        //         foreach (var s in successful)
+        //         {
+        //             WriteGreenLine(4, $"{s.Filename} ({s.TimeElapsed()} ms)");
+        //         }
+        //     }
+
+        //     ///
+
+        //     if (failed.Count() > 0)
+        //     {
+        //         WriteRedLine(2, $"Failed: {failed.Count()}");
+
+        //         foreach (var f in failed)
+        //         {
+        //             WriteRedLine(4, $"{f.Filename} ({f.TimeElapsed()} ms)");
+        //         }
+        //     }
+
+        //     ///
+
+        //     if (unsupported.Count() > 0)
+        //     {
+        //         WriteYellowLine(2, $"Unsupported: {unsupported.Count()}");
+
+        //         foreach (var u in unsupported)
+        //         {
+        //             WriteYellowLine(4, $"{u}");
+        //         }
+        //     }
+        // }
     }
 }

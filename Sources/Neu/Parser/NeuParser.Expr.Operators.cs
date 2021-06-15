@@ -31,7 +31,7 @@ namespace Neu
             }
         }
 
-        public static NueBinaryOperatorExpr ParseBinaryOperator(
+        public static NueBinaryOperatorExpr ParseBinaryOperatorExpr(
             this NeuParser parser,
             NeuPunctuation punc)
         {
@@ -47,6 +47,8 @@ namespace Neu
             return new NueBinaryOperatorExpr(
                 children: new Node[]
                 {
+                    // Cast punc to operator
+
                     new NeuBinaryOperator(
                         source: punc.Source, 
                         start: punc.Start,

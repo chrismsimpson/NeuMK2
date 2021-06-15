@@ -15,17 +15,13 @@ namespace Neu
             this NeuParser parser,
             SourceLocation start,
             IEnumerable<NeuToken> modifiers,
-            NeuToken token,
-            bool escapeOnNewline,
-            params NeuPunctuationType[] delimiters)
+            IEnumerable<NeuExpression> expressions)
         {
             var children = new List<Node>();
 
             ///
 
-            var exprList = parser.ParseExprList(start, modifiers, token, escapeOnNewline, delimiters);
-
-            ///
+            var exprList = parser.ParseExprList(start, modifiers, expressions);
 
             children.Add(exprList);
 

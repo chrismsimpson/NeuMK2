@@ -48,6 +48,18 @@ namespace Neu
             return tokenizer.TokenizePunctuation(NeuPunctuationType.RightParen);
         }
 
+        public static NeuPunctuation TokenizeLeftBracket(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.TokenizePunctuation(NeuPunctuationType.LeftBracket);
+        }
+
+        public static NeuPunctuation TokenizeRightBracket(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.TokenizePunctuation(NeuPunctuationType.RightBracket);
+        }
+
         public static NeuPunctuation TokenizeSemicolon(
             this Tokenizer<NeuToken> tokenizer)
         {
@@ -70,6 +82,12 @@ namespace Neu
             this Tokenizer<NeuToken> tokenizer)
         {
             return tokenizer.TokenizePunctuation(NeuPunctuationType.Arrow);
+        }
+
+        public static NeuPunctuation TokenizePeriod(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.TokenizePunctuation(NeuPunctuationType.Period);
         }
     }
 }

@@ -12,6 +12,18 @@ namespace Neu
     public static partial class NeuTokenizerHelpers
     {
         public static NeuKeyword TokenizeKeyword(
+            this Tokenizer<NeuToken> tokenizer,
+            NeuKeywordType keywordType)
+        {
+            if (tokenizer.Next() is NeuKeyword k && k.KeywordType == keywordType)
+            {
+                return k;
+            }
+
+            throw new Exception();
+        }
+
+        public static NeuKeyword TokenizeKeyword(
             this Tokenizer<NeuToken> tokenizer)
         {
             if (tokenizer.Next() is NeuKeyword k)
@@ -22,7 +34,7 @@ namespace Neu
             throw new Exception();
         }
 
-        public static NeuToken TokenizeModifier(
+        public static NeuKeyword TokenizeModifier(
             this Tokenizer<NeuToken> tokenizer)
         {
             var keyword = tokenizer.TokenizeKeyword();
@@ -50,5 +62,10 @@ namespace Neu
             return modifiers;
         }
 
+        public static NeuKeyword TokenizeElse(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.TokenizeKeyword(NeuKeywordType.Else);
+        }
     }
 }
