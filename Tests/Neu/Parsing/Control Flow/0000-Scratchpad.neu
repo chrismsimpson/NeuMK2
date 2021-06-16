@@ -1,3 +1,3 @@
-struct MyStruct: MyMod.Deeper.MyProtocol, MyOtherProto {
+let n = { (Int) -> Void in
     
 }

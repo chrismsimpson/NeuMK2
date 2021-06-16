@@ -5,6 +5,8 @@
 using System;
 using System.Collections.Generic;
 
+using static System.Array;
+
 using static Neu.NeuTokenizer;
 
 namespace Neu
@@ -128,6 +130,25 @@ namespace Neu
         }
 
         public static NeuExpression ParseConditionExpression(
+            this NeuParser parser)
+        {
+            var start = parser.Position();
+
+            ///
+
+            var token = parser.Tokenizer.Next();
+
+            if (token == null)
+            {
+                throw new Exception();
+            }
+
+            ///
+
+            return parser.ParseConditionExpression(start, Empty<NeuToken>(), token);
+        }
+
+        public static NeuExpression ParseConditionExpression(
             this NeuParser parser, 
             SourceLocation start, 
             IEnumerable<NeuToken> modifiers,
@@ -162,7 +183,6 @@ namespace Neu
                 default:
 
                     throw new Exception();
-                    // return parser.ParseExpression(start, modifiers, token);
             }
         }
 
@@ -180,30 +200,6 @@ namespace Neu
             NeuToken token)
         {
             throw new Exception();
-            // var children = new List<Node>();
-
-            // ///
-
-            // children.Add(token);
-
-            // ///
-
-            // var exprPattern = parser.ParseExprPattern();
-
-            // children.Add(exprPattern);
-
-            // ///
-
-            // var initClause = parser.ParseInitClause();
-
-            // children.Add(initClause);
-
-            // ///
-
-            // return new NeuMatchingPatternCondition(
-            //     children: children,
-            //     start: start,
-            //     end: parser.Position());
         }
     }
 }

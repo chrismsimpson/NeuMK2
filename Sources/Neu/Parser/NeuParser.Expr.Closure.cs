@@ -9,16 +9,13 @@ namespace Neu
 {
     public static partial class NeuParserHelpers
     {
-        public static NeuContinueStatement ParseContinueStatement(
+        public static NeuClosureExpr ParseClosureExpr(
             this NeuParser parser,
             SourceLocation start,
             IEnumerable<NeuToken> modifiers,
-            NeuToken token)
+            NeuPunctuation punc)
         {
-            return new NeuContinueStatement(
-                children: new Node[] { token },
-                start: start,
-                end: parser.Position());
+            throw new Exception();
         }
     }
 }

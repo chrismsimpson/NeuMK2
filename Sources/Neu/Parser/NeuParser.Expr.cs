@@ -100,6 +100,18 @@ namespace Neu
 
                 ///
 
+                case NeuPunctuationType.LeftBrace when parser.Tokenizer.PeekClosure():
+
+                    return parser.ParseClosureExpr(start, modifiers, punc);
+
+                ///
+
+                case NeuPunctuationType.LeftBrace when parser.Tokenizer.PeekDictionary():
+
+                    return parser.ParseDictionaryExpr(start, modifiers, punc);
+
+                ///
+
                 default:
 
                     throw new Exception();
@@ -230,5 +242,14 @@ namespace Neu
                 start: start,
                 end: parser.Position());
         }
+    
+        // public static NeuExpression ParseClosureOrDictionaryExpr(
+        //     this NeuParser parser,
+        //     SourceLocation start, 
+        //     IEnumerable<NeuToken> modifiers, 
+        //     NeuPunctuation punc)
+        // {
+        //     throw new Exception();   
+        // }
     }
 }

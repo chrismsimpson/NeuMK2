@@ -19,7 +19,26 @@ namespace Neu
 
             ///
 
-            throw new Exception();
+            children.Add(token);
+
+            ///
+
+            var conditionElementList = parser.ParseConditionElementList();
+
+            children.Add(conditionElementList);
+
+            ///
+
+            var codeBlock = parser.ParseCodeBlock();
+
+            children.Add(codeBlock);
+
+            ///
+
+            return new NeuWhileStatement(
+                children: children,
+                start: start,
+                end: parser.Position());
         }
     }
 }

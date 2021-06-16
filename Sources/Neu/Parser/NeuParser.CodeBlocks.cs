@@ -176,5 +176,22 @@ namespace Neu
                 start: start,
                 end: parser.Position());
         }
+
+        public static NeuCodeBlockItemList ParseCodeBlockItemList(
+            this NeuParser parser)
+        {
+            var start = parser.Position();
+
+            ///
+
+            var items = parser.ParseCodeBlockItems();
+
+            ///
+
+            return new NeuCodeBlockItemList(
+                children: items,
+                start: start,
+                end: parser.Position());
+        }
     }
 }

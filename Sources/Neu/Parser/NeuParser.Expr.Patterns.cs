@@ -12,21 +12,29 @@ namespace Neu
 {
     public static partial class NeuParserHelpers
     {
-        // public static NeuExprPattern ParseExprPattern(
-        //     this NeuParser parser)
-        // {
-        //     var start = parser.Position();
+        public static NeuExprPattern ParseExpressionPattern(
+            this NeuParser parser)
+        {
+            var start = parser.Position();
 
-        //     ///
+            ///
 
-        //     var memberAccessExpr = parser.ParseMemberAccessExpr();
+            /// Possibly migrate to ParseExpression, when it exists?
+            // var expression = parser.ParseConditionExpression();
 
-        //     ///
+            var expression = parser.ParseExpression();
 
-        //     return new NeuExprPattern(
-        //         children: new Node[] { memberAccessExpr },
-        //         start: start,
-        //         end: parser.Position());
-        // }
+            if (expression == null)
+            {
+                throw new Exception();
+            }
+
+            ///
+
+            return new NeuExprPattern(
+                children: new Node[] { expression },
+                start: start,
+                end: parser.Position());
+        }
     }
 }

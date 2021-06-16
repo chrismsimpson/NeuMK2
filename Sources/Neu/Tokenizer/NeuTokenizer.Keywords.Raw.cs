@@ -146,6 +146,5 @@ namespace Neu
         {
             return tokenizer.RawTokenizeKeyword("where", NeuKeywordType.Where);
         }
-
     }
 }

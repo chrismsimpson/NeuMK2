@@ -65,5 +65,11 @@ namespace Neu
         {
             return tokenizer.PeekKeyword(NeuKeywordType.If);
         }
+
+        public static bool PeekWhere(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.PeekKeyword(NeuKeywordType.Where);
+        }
     }
 }

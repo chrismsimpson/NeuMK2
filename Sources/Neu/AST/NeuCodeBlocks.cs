@@ -34,4 +34,13 @@ namespace Neu
             SourceLocation end)
             : base(children, start, end) { }
     }
+
+    public partial class NeuCodeBlockItemList : NeuNode
+    {
+        public NeuCodeBlockItemList(
+            IEnumerable<Node> children,
+            SourceLocation start,
+            SourceLocation end)
+            : base(children, start, end) { }
+    }
 }

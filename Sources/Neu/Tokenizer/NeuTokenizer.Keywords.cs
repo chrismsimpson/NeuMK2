@@ -80,5 +80,17 @@ namespace Neu
         {
             return tokenizer.TokenizeKeyword(NeuKeywordType.Else);
         }
+
+        public static NeuKeyword TokenizeIn(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.TokenizeKeyword(NeuKeywordType.In);
+        }
+
+        public static NeuKeyword TokenizeCase(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.TokenizeKeyword(NeuKeywordType.Case);
+        }
     }
 }
