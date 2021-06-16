@@ -1,1 +1,3 @@
-foo(bar: baz()) = 2
+struct MyStruct: MyMod.Deeper.MyProtocol, MyOtherProto {
+    
+}

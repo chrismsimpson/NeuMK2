@@ -39,7 +39,7 @@ namespace Neu
         {
             var keyword = tokenizer.TokenizeKeyword();
 
-            if (IsStatementModifier(keyword))
+            if (IsModifier(keyword))
             {
                 return keyword;
             }
@@ -60,6 +60,19 @@ namespace Neu
             }
 
             return modifiers;
+        }
+
+        public static NeuKeyword TokenizeUsingTypeKeyword(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            var keyword = tokenizer.TokenizeKeyword();
+
+            if (IsUsingTypeKeyword(keyword))
+            {
+                return keyword;
+            }
+
+            throw new Exception();
         }
 
         public static NeuKeyword TokenizeElse(

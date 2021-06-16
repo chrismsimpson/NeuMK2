@@ -76,5 +76,12 @@ namespace Neu
 
             return null;
         }
+
+        public static bool PreviousContainsNewline<T>(
+            this Tokenizer<T> tokenizer)
+            where T : Token
+        {
+            return tokenizer.Previous()?.Source.Contains('\n') ?? false;
+        }
     }
 }

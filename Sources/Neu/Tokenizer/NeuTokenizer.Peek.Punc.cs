@@ -54,6 +54,12 @@ namespace Neu
             return tokenizer.PeekPunctuation(NeuPunctuationType.Semicolon);
         }
 
+        public static bool PeekColon(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.PeekPunctuation(NeuPunctuationType.Colon);
+        }
+
         public static bool PeekComma(
             this Tokenizer<NeuToken> tokenizer)
         {
@@ -70,6 +76,12 @@ namespace Neu
             this Tokenizer<NeuToken> tokenizer)
         {
             return tokenizer.PeekPunctuation(NeuPunctuationType.Arrow);
+        }
+
+        public static bool PeekPeriod(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.PeekPunctuation(NeuPunctuationType.Period);
         }
     }
 }

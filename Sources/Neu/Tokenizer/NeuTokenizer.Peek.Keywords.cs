@@ -6,6 +6,8 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
+using static Neu.NeuTokenizer;
+
 namespace Neu
 {
     public static partial class NeuTokenizerHelpers
@@ -33,21 +35,23 @@ namespace Neu
         public static bool PeekModifier(
             this Tokenizer<NeuToken> tokenizer)
         {
-            switch (tokenizer.Peek())
+            if (tokenizer.Peek() is NeuToken t)
             {
-                case NeuKeyword k
-                    when k.KeywordType == NeuKeywordType.Private || 
-                        k.KeywordType == NeuKeywordType.Internal ||
-                        k.KeywordType == NeuKeywordType.Public:
-
-                    return true;
-
-                ///
-
-                default:
-
-                    return false;
+                return IsModifier(t);
             }
+
+            return false;
+        }
+
+        public static bool PeekUsingTypeKeyword(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            if (tokenizer.Peek() is NeuToken t)
+            {
+                return IsUsingTypeKeyword(t);
+            }
+
+            return false;
         }
 
         public static bool PeekElse(

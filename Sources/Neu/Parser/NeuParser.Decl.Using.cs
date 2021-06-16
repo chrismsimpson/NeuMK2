@@ -16,7 +16,33 @@ namespace Neu
             IEnumerable<NeuToken> modifiers,
             NeuToken token)
         {
-            throw new Exception();
+            var children = new List<Node>();
+
+            ///
+
+            children.Add(token);
+
+            ///
+
+            if (parser.Tokenizer.PeekUsingTypeKeyword())
+            {
+                var usingTypeKeyword = parser.Tokenizer.TokenizeUsingTypeKeyword();
+
+                children.Add(usingTypeKeyword);
+            }
+
+            ///
+            
+            var accessPath = parser.ParseAccessPath();
+
+            children.Add(accessPath);
+
+            ///
+
+            return new NeuUsingDecl(
+                children: children,
+                start: start,
+                end: parser.Position());
         }
     }
 }

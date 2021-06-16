@@ -51,7 +51,7 @@ namespace Neu
             {
                 /// Modifiers
 
-                case NeuKeyword keyword when IsStatementModifier(keyword):
+                case NeuKeyword keyword when IsModifier(keyword):
 
                     var next = parser.Tokenizer.Next();
 

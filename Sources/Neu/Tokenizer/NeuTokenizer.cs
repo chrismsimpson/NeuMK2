@@ -209,7 +209,22 @@ namespace Neu
             }
         }
 
-        public static bool IsStatementModifier(
+        public static bool IsModifier(
+            NeuToken token)
+        {
+            switch (token)
+            {
+                case NeuKeyword k:
+                    return IsModifier(k);
+
+                ///
+
+                default:
+                    return false;
+            }
+        }
+
+        public static bool IsModifier(
             NeuKeyword keyword)
         {
             switch (keyword.KeywordType)
@@ -337,7 +352,75 @@ namespace Neu
                 default:
                     return false;
             }
+        }
 
+        ///
+
+        public static bool IsTypeIdDelimiter(
+            NeuToken token)
+        {
+            switch (token)
+            {
+                case NeuPunctuation p:
+                    return IsTypeIdDelimiter(p);
+
+                ///
+
+                default:
+                    return false;
+            }
+        }
+
+        public static bool IsTypeIdDelimiter(
+            NeuPunctuation punc)
+        {
+            switch (punc.PunctuationType)
+            {
+                case NeuPunctuationType.Comma:
+                case NeuPunctuationType.LeftBrace:
+                    return true;
+
+                ///
+
+                default:
+                    return false;
+            }
+        }
+
+        ///
+
+
+        public static bool IsUsingTypeKeyword(
+            NeuToken token)
+        {
+            switch (token)
+            {
+                case NeuKeyword k:
+                    return IsUsingTypeKeyword(k);
+
+                ///
+
+                default:
+                    return false;
+            }
+        }
+
+        public static bool IsUsingTypeKeyword(
+            NeuKeyword keyword)
+        {
+            switch (keyword.KeywordType)
+            {
+                case NeuKeywordType.Func:
+                case NeuKeywordType.Alias:
+                case NeuKeywordType.Struct:
+                case NeuKeywordType.Enum:
+                    return true;
+
+                ///
+
+                default:
+                    return false;
+            }
         }
     }
 
@@ -345,8 +428,6 @@ namespace Neu
 
     public static partial class NeuTokenizerHelpers
     {
-        
-
         public static NeuToken? Next(
             this Tokenizer<NeuToken> tokenizer)
         {
