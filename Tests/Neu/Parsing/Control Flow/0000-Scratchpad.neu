@@ -1,3 +1,4 @@
-let n = { (Int) -> Void in
+guard let a = b else {
     
+    return 0
 }

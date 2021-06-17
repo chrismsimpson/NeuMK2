@@ -345,6 +345,7 @@ namespace Neu
                 case NeuPunctuationType.Comma:
                 case NeuPunctuationType.RightParen:
                 case NeuPunctuationType.Semicolon:
+                case NeuPunctuationType.Colon: // this one is questionable
                     return true;
 
                 ///
@@ -421,6 +422,106 @@ namespace Neu
                 default:
                     return false;
             }
+        }
+
+        ///
+
+        public static bool IsVarDeclKeyword(
+            NeuToken token)
+        {
+            switch (token)
+            {
+                case NeuKeyword k:
+                    return IsVarDeclKeyword(k);
+
+                default:
+                    return false;
+            }
+        }
+
+        public static bool IsVarDeclKeyword(
+            NeuKeyword keyword)
+        {
+            switch (keyword.KeywordType)
+            {
+                case NeuKeywordType.Var:
+                case NeuKeywordType.Let:
+                    return true;
+
+                ///
+
+                default:
+                    return false;
+            }
+        }
+
+        ///
+
+        public static bool IsInitKeyword(
+            NeuToken token)
+        {
+            switch (token)
+            {
+                case NeuKeyword k:
+                    return IsInitKeyword(k);
+                
+                ///
+
+                default:
+                    return false;
+            }
+        }
+
+        public static bool IsInitKeyword(
+            NeuKeyword keyword)
+        {
+            return keyword.KeywordType == NeuKeywordType.Init;
+        }
+
+        ///
+
+        public static bool IsGuardKeyword(
+            NeuToken token)
+        {
+            switch (token)
+            {
+                case NeuKeyword k:
+                    return IsGuardKeyword(k);
+                
+                ///
+
+                default:
+                    return false;
+            }
+        }
+
+        public static bool IsGuardKeyword(
+            NeuKeyword keyword)
+        {
+            return keyword.KeywordType == NeuKeywordType.Guard;
+        }
+
+        ///
+
+        public static bool IsLetKeyword(
+            NeuToken token)
+        {
+            switch (token)
+            {
+                case NeuKeyword k:
+                    return IsLetKeyword(k);
+                
+                ///
+
+                default:
+                    return false;
+            }
+        }
+
+        public static bool IsLetKeyword(
+            NeuKeyword keyword)
+        {
+            return keyword.KeywordType == NeuKeywordType.Let;
         }
     }
 
@@ -582,19 +683,31 @@ namespace Neu
                 case 'f' when tokenizer.Scanner.PeekThenWhitespace(equals: "unc"):
                     return tokenizer.RawTokenizeFunc();
 
+                case 'g' when tokenizer.Scanner.PeekThenWhitespace(equals: "uard"):
+                    return tokenizer.RawTokenizeGuard();
+
                 case 'i' when tokenizer.Scanner.PeekThenDelimiter(equals: "f", delimitedBy: c => IsWhiteSpace(c) || c == '('):
                     return tokenizer.RawTokenizeIf();
 
                 case 'i' when tokenizer.Scanner.PeekThenDelimiter(equals: "n", delimitedBy: c => IsWhiteSpace(c) || c == '(' || c == '.'):
                     return tokenizer.RawTokenizeIn();
 
+                case 'i' when tokenizer.Scanner.PeekThenDelimiter(equals: "nit", delimitedBy: c => IsWhiteSpace(c) || c == '('):
+                    return tokenizer.RawTokenizeInit();
+
                 case 'i' when tokenizer.Scanner.PeekThenWhitespace(equals: "nterface"):
                     return tokenizer.RawTokenizeInterface();
+
+                case 'l' when tokenizer.Scanner.PeekThenWhitespace(equals: "et"):
+                    return tokenizer.RawTokenizeLet();
 
 
                 
                 case 'p' when tokenizer.Scanner.PeekThenWhitespace(equals: "rivate"):
                     return tokenizer.RawTokenizePrivate();
+
+                case 'r' when tokenizer.Scanner.PeekThenDelimiter(equals: "eturn", delimitedBy: c => IsWhiteSpace(c) || c == ';' || c == '}'):
+                    return tokenizer.RawTokenizeReturn();
 
                 case 's' when tokenizer.Scanner.PeekThenWhitespace(equals: "truct"):
                     return tokenizer.RawTokenizeStruct();
@@ -607,6 +720,9 @@ namespace Neu
 
                 case 'u' when tokenizer.Scanner.PeekThenWhitespace(equals: "sing"):
                     return tokenizer.RawTokenizeUsing();
+
+                case 'v' when tokenizer.Scanner.PeekThenWhitespace(equals: "ar"):
+                    return tokenizer.RawTokenizeVar();
 
                 case 'w' when tokenizer.Scanner.PeekThenDelimiter(equals: "hile", delimitedBy: c => IsWhiteSpace(c) || c == '('):
                     return tokenizer.RawTokenizeWhile();

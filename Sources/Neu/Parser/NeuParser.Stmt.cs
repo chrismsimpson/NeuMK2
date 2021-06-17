@@ -65,6 +65,10 @@ namespace Neu
 
                 /// Declarations
 
+                case NeuKeyword keyword when IsVarDeclKeyword(token):
+
+                    return parser.ParseVariableDecl(start, modifiers, token);
+
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Func:
 
                     return parser.ParseFunctionDeclaration(start, modifiers, token);
@@ -105,6 +109,11 @@ namespace Neu
 
                     return parser.ParseAliasDecl(start, modifiers, token);
 
+                case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Init:
+
+                    return parser.ParseInitDecl(start, modifiers, token);
+
+
 
 
 
@@ -137,6 +146,10 @@ namespace Neu
                 case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Return:
 
                     return parser.ParseReturnStatement(start, modifiers, token);
+
+                case NeuKeyword keyword when keyword.KeywordType == NeuKeywordType.Guard:
+
+                    return parser.ParseGuardStatement(start, modifiers, token);
 
 
 

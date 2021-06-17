@@ -26,7 +26,8 @@ namespace Neu
 
             ///
 
-            var list = parser.ParseCodeBlockList();
+            // var list = parser.ParseCodeBlockList();
+            var list = parser.ParseCodeBlockItemList();
 
             children.Add(list);
 
@@ -46,22 +47,22 @@ namespace Neu
 
         ///
 
-        public static NeuCodeBlockList ParseCodeBlockList(
-            this NeuParser parser)
-        {
-            var start = parser.Position();
+        // public static NeuCodeBlockList ParseCodeBlockList(
+        //     this NeuParser parser)
+        // {
+        //     var start = parser.Position();
 
-            ///
+        //     ///
 
-            var items = parser.ParseCodeBlockItems();            
+        //     var items = parser.ParseCodeBlockItems();            
 
-            ///
+        //     ///
 
-            return new NeuCodeBlockList(
-                children: items,
-                start: start,
-                end: parser.Position());
-        }
+        //     return new NeuCodeBlockList(
+        //         children: items,
+        //         start: start,
+        //         end: parser.Position());
+        // }
 
         ///
 

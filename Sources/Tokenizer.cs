@@ -37,7 +37,7 @@ namespace Neu
             this Tokenizer<T> tokenizer)
             where T : Token
         {
-            if (tokenizer.Position() == tokenizer.Scanner.Position())
+            if (tokenizer.Position().RawPosition == tokenizer.Scanner.Position().RawPosition)
             {
                 return tokenizer.Scanner.IsEof();
             }

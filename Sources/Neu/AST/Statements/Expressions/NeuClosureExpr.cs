@@ -15,4 +15,13 @@ namespace Neu
             SourceLocation end)
             : base(children, start, end) { }
     }
+
+    public partial class NeuClosureSignature : NeuNode
+    {
+        public NeuClosureSignature(
+            IEnumerable<Node> children,
+            SourceLocation start,
+            SourceLocation end)
+            : base(children, start, end) { }
+    }
 }

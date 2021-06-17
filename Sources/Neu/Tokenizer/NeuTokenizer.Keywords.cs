@@ -81,16 +81,41 @@ namespace Neu
             return tokenizer.TokenizeKeyword(NeuKeywordType.Else);
         }
 
+        public static NeuKeyword TokenizeGuard(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.TokenizeKeyword(NeuKeywordType.Guard);
+        }
+
         public static NeuKeyword TokenizeIn(
             this Tokenizer<NeuToken> tokenizer)
         {
             return tokenizer.TokenizeKeyword(NeuKeywordType.In);
         }
 
+        public static NeuKeyword TokenizeInit(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.TokenizeKeyword(NeuKeywordType.Init);
+        }
+
         public static NeuKeyword TokenizeCase(
             this Tokenizer<NeuToken> tokenizer)
         {
             return tokenizer.TokenizeKeyword(NeuKeywordType.Case);
+        }
+
+        public static NeuKeyword TokenizeVarDeclKeyword(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            var keyword = tokenizer.TokenizeKeyword();
+
+            if (IsVarDeclKeyword(keyword))
+            {
+                return keyword;
+            }
+
+            throw new Exception();
         }
     }
 }

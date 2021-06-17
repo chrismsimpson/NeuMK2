@@ -89,5 +89,11 @@ namespace Neu
         {
             return tokenizer.TokenizePunctuation(NeuPunctuationType.Period);
         }
+
+        public static NeuPunctuation TokenizeEqual(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.TokenizePunctuation(NeuPunctuationType.Equal);
+        }
     }
 }

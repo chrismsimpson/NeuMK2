@@ -87,6 +87,12 @@ namespace Neu
             return tokenizer.RawTokenizeKeyword("func", NeuKeywordType.Func);
         }
 
+        public static NeuKeyword RawTokenizeGuard(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizeKeyword("guard", NeuKeywordType.Guard);
+        }
+
         private static NeuKeyword RawTokenizeIf(
             this Tokenizer<NeuToken> tokenizer)
         {
@@ -99,16 +105,34 @@ namespace Neu
             return tokenizer.RawTokenizeKeyword("in", NeuKeywordType.In);
         }
 
+        private static NeuKeyword RawTokenizeInit(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizeKeyword("init", NeuKeywordType.Init);
+        }
+
         private static NeuKeyword RawTokenizeInterface(
             this Tokenizer<NeuToken> tokenizer)
         {
             return tokenizer.RawTokenizeKeyword("interface", NeuKeywordType.Interface);
         }
 
+        private static NeuKeyword RawTokenizeLet(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizeKeyword("let", NeuKeywordType.Let);
+        }
+
         private static NeuKeyword RawTokenizePrivate(
             this Tokenizer<NeuToken> tokenizer)
         {
             return tokenizer.RawTokenizeKeyword("private", NeuKeywordType.Private);
+        }
+
+        private static NeuKeyword RawTokenizeReturn(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizeKeyword("return", NeuKeywordType.Return);
         }
 
         private static NeuKeyword RawTokenizeStruct(
@@ -133,6 +157,12 @@ namespace Neu
             this Tokenizer<NeuToken> tokenizer)
         {
             return tokenizer.RawTokenizeKeyword("using", NeuKeywordType.Using);
+        }
+
+        private static NeuKeyword RawTokenizeVar(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizeKeyword("var", NeuKeywordType.Var);
         }
 
         private static NeuKeyword RawTokenizeWhile(

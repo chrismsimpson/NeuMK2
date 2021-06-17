@@ -17,14 +17,14 @@ namespace Neu
             : base(children, start, end) { }
     }
 
-    public partial class NeuCodeBlockList : NeuNode
-    {
-        public NeuCodeBlockList(
-            IEnumerable<Node> children,
-            SourceLocation start,
-            SourceLocation end)
-            : base(children, start, end) { }
-    }
+    // public partial class NeuCodeBlockList : NeuNode
+    // {
+    //     public NeuCodeBlockList(
+    //         IEnumerable<Node> children,
+    //         SourceLocation start,
+    //         SourceLocation end)
+    //         : base(children, start, end) { }
+    // }
 
     public partial class NeuCodeBlockItem : NeuNode
     {

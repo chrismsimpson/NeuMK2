@@ -39,7 +39,23 @@ namespace Neu
 
             while (!parser.IsEof())
             {
-                if (parser.Tokenizer.PeekLeftBrace())
+                // if (parser.Tokenizer.PeekLeftBrace())
+                // {
+                //     break;
+                // }
+
+                var peek = parser.Tokenizer.Peek();
+
+                ///
+
+                if (peek is NeuPunctuation p && p.PunctuationType == NeuPunctuationType.LeftBrace)
+                {
+                    break;
+                }
+
+                ///
+
+                if (peek is NeuKeyword k && k.KeywordType == NeuKeywordType.Else)
                 {
                     break;
                 }
@@ -168,6 +184,12 @@ namespace Neu
 
                 ///
 
+                case NeuKeyword k when k.KeywordType == NeuKeywordType.Let:
+
+                    return parser.ParseOptionalBindingCondition(start, token);
+
+                ///
+
                 case NeuPunctuation p when p.PunctuationType == NeuPunctuationType.LeftParen:
 
                     return parser.ParseTupleExpr(start, token);
@@ -191,7 +213,35 @@ namespace Neu
             SourceLocation start,
             NeuToken token)
         {
-            throw new Exception();
+            var children = new List<Node>();
+
+            ///
+
+            if (!IsLetKeyword(token))
+            {
+                throw new Exception();
+            }
+
+            children.Add(token);
+
+            ///
+
+            var idPattern = parser.ParseIdentifierPattern();
+
+            children.Add(idPattern);
+
+            ///
+
+            var initClause = parser.ParseInitClause();
+
+            children.Add(initClause);
+
+            ///
+
+            return new NeuOptionalBindingCondition(
+                children: children,
+                start: start,
+                end: parser.Position());
         }
 
         public static NeuMatchingPatternCondition ParseMatchingPatternCondition(
