@@ -39,7 +39,6 @@ namespace Neu
 
             return parser.ParseExpression(
                 start: start,
-                // modifiers: Empty<NeuToken>(),
                 token: token);
         }
 

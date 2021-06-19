@@ -7,9 +7,11 @@ using System.Collections.Generic;
 
 namespace Neu
 {
-    public abstract class Interpreter<F> where F : Frame<Node>
+    public abstract class Interpreter<F, E>
+        where F : Frame<Node>
+        where E : VTableEntry
     {   
-        internal VTable VTable { get; init; }
+        internal VTable<E> VTable { get; init; }
 
         internal Stack<F> Stack { get; init; }
 
@@ -17,10 +19,10 @@ namespace Neu
 
         public Interpreter(
             Stack<F> frames,
-            VTable vTable)
+            VTable<E> vtable)
         {
             this.Stack = frames;
-            this.VTable = vTable;
+            this.VTable = vtable;
         }
     }
 }

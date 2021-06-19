@@ -674,6 +674,9 @@ namespace Neu
                 case 'e' when tokenizer.Scanner.PeekThenWhitespace(equals: "num"):
                     return tokenizer.RawTokenizeEnum();
 
+                case 'e' when tokenizer.Scanner.PeekThenWhitespace(equals: "xtend"):
+                    return tokenizer.RawTokenizeExtend();
+
                 case 'f' when tokenizer.Scanner.PeekThenDelimiter(equals: "alse", delimitedBy: c => IsWhiteSpace(c) || c == ')' || c == ',' || c == ':'):
                     return tokenizer.RawTokenizeFalse();
 

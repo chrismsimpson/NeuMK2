@@ -39,9 +39,18 @@ namespace Neu
 
             ///
 
-            var memberDeclList = parser.ParseMemberDeclList();
+            if (parser.Tokenizer.PeekColon())
+            {
+                var typeAlignClause = parser.ParseTypeAlignClause();
 
-            children.Add(memberDeclList);
+                children.Add(typeAlignClause);
+            }
+
+            ///
+
+            var memberDeclBlock = parser.ParseMemberDeclBlock();
+
+            children.Add(memberDeclBlock);
 
             ///
 

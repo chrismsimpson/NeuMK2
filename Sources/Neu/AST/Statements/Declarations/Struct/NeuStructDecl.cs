@@ -16,4 +16,33 @@ namespace Neu
             SourceLocation end)
             : base(children, start, end) { }
     }
+
+    ///
+
+    public static partial class NeuStructDeclHelpers
+    {
+        // TODO: generalize to NeuDecl?
+
+        public static String Name(
+            this NeuStructDecl structDecl)
+        {
+            foreach (var child in structDecl.Children)
+            {
+                switch (child)
+                {
+                    case NeuIdentifier identifier:
+
+                        return identifier.Source;
+                    
+                    ///
+
+                    default:
+
+                        continue;
+                }
+            }
+
+            throw new Exception();
+        }
+    }
 }

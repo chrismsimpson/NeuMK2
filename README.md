@@ -69,7 +69,7 @@ alias VarRawPointer = VarBorrow<Any>
 ## No GC/Classes
 
 Everything is a struct, with possible 'alignment'. You may align to a primitive type
-(e.g. Int32, Int64 etc.) or an interface (interfaces are denoted with an I). Interface alignment or implicit alignment (i.e. not specifying anything) means the system will
+(e.g. Int32, Int64 etc.) or an interface (I prefix denotes an interface). Interface alignment or implicit alignment (i.e. not specifying anything) means the system will
 auto align your type [ABI implications?].
 
 
@@ -132,7 +132,7 @@ int main(int argc, char *argv[])
 
 In Neu:
 ```
-func main(argc: Int, argv: mut borrow Char[]) -> Int {
+func main(argc: Int, argv: borrow var Char[]) -> Int {
 
     return 0
 }
@@ -153,6 +153,10 @@ func main(args: Array<String>) {
 
 }
 ```
+
+## Alignment (and auto-alignment)
+
+Calculate alignment of types to be C compatible?
 
 ## Types
 

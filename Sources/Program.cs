@@ -26,7 +26,8 @@ namespace Neu
         public static void Main(
             String[] args)
         {
-            RunTests();
+            // RunTests();
+            Interpret();
         }
 
         public static void RunTests()
@@ -52,6 +53,19 @@ namespace Neu
             }
 
             PrintTestStatistics(tests);
+        }
+
+        public static void Interpret()
+        {
+            var parser = NeuParser.FromFile("../Tests/Neu/Interpreting/0000-Scratchpad.neu");
+
+            var sourceFile = parser.ParseSourceFile();
+
+            var interpreter = new NeuInterpreter();
+
+            interpreter.Run(sourceFile);
+
+            // Write(sourceFile.Dump());
         }
 
         // public static void Main(String[] args)

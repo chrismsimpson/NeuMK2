@@ -69,6 +69,12 @@ namespace Neu
             return tokenizer.RawTokenizeKeyword("enum", NeuKeywordType.Enum);
         }
 
+        public static NeuKeyword RawTokenizeExtend(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizeKeyword("extend", NeuKeywordType.Extend);
+        }
+
         public static NeuKeyword RawTokenizeFalse(
             this Tokenizer<NeuToken> tokenizer)
         {
