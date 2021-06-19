@@ -1,4 +1,6 @@
-guard let a = b else {
-    
-    return 0
+func foo() -> Int {
+
+    return 1 + 2
 }
+
+foo()

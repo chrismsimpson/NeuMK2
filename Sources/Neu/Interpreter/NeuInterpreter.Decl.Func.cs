@@ -18,5 +18,12 @@ namespace Neu
 
             return func;
         }
+
+        public static Operation Execute(
+            this NeuExpression expression,
+            Interpreter<NeuFrame> interpreter)
+        {
+            throw new Exception();
+        }
     }
 }

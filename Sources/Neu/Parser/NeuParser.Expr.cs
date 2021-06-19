@@ -79,7 +79,33 @@ namespace Neu
                     return parser.ParseExpression(start, modifiers, literal);
 
                 ///
+
+                case NeuOperator op:
+
+                    return parser.ParseExpression(start, modifiers, op);
+
+                ///
                 
+                default:
+
+                    throw new Exception();
+            }
+        }
+
+        public static NeuExpression ParseExpression(
+            this NeuParser parser,
+            SourceLocation start,
+            IEnumerable<NeuToken> modifiers,
+            NeuOperator op)
+        {
+            switch (op)
+            {
+                case NeuBinaryOperator binOp:
+
+                    return parser.ParseBinaryOperatorExpr(start, modifiers, binOp);
+
+                ///
+
                 default:
 
                     throw new Exception();
@@ -187,21 +213,11 @@ namespace Neu
 
                     return parser.ParseExpression(start, modifiers, memberAccessExpr);
 
-
-
-
                 ///
 
                 case NeuKeyword k when k.KeywordType == NeuKeywordType.Else:
 
                     return expr;
-
-                ///
-
-
-
-
-
 
                 ///
 
@@ -211,33 +227,57 @@ namespace Neu
 
                 ///
 
-                    // TOO: IsSequenceExprDelimiter(t) ?
+                case null:
+
+                    return expr;
 
                 ///
 
-
-
                 default:
 
-                    return parser.ParseSequenceExpr(start, modifiers, new NeuExpression[] { expr });
+                    return parser.ParseExpressions(start, modifiers, expr);
             }
         }
 
         ///
 
-        public static NeuExprList ParseExprList(
+        public static NeuExpression ParseExpressions(
+            this NeuParser parser,
+            SourceLocation start,
+            IEnumerable<NeuToken> modifiers,
+            NeuExpression expr)
+        {
+            var expressions = parser.ParseExpressions(start, modifiers, new NeuExpression[] { expr });
+
+            ///
+
+            switch (expressions.Count())
+            {
+                case 1:
+
+                    return expressions.First();
+
+                ///
+
+                default:
+
+                    return parser.ParseSequenceExpr(start, modifiers, expressions);
+            }
+        }
+
+        public static IEnumerable<NeuExpression> ParseExpressions(
             this NeuParser parser,
             SourceLocation start,
             IEnumerable<NeuToken> modifiers,
             IEnumerable<NeuExpression> expressions)
         {
-            var children = new List<Node>();
+            var e = new List<NeuExpression>();
 
             ///
 
             foreach (var expr in expressions)
             {
-                children.Add(expr);
+                e.Add(expr);
             }
 
             ///
@@ -256,15 +296,12 @@ namespace Neu
                     break;
                 }
 
-                children.Add(expr);
+                e.Add(expr);
             }
 
             ///
 
-            return new NeuExprList(
-                children: children,
-                start: start,
-                end: parser.Position());
+            return e;
         }
     }
 }

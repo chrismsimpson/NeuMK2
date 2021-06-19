@@ -45,6 +45,12 @@ namespace Neu
 
                     ///
 
+                    case NeuExpression expr:
+
+                        result = expr.Execute(interpreter);
+
+                        break;
+
                     // case NeuCodeBlockList codeBlockList:
 
                     //     throw new Exception();
