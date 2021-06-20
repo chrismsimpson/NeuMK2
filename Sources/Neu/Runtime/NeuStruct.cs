@@ -6,9 +6,9 @@ using System;
 
 namespace Neu
 {
-    public partial class NeuStruct : NeuOperation
-    {
-        public NeuStruct()
-            : base() { }
-    }
+    // public partial class NeuStruct : NeuOperation
+    // {
+    //     public NeuStruct()
+    //         : base() { }
+    // }
 }

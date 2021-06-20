@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Neu
 {
-    public partial class NeuMemberDeclBlock : Node
+    public partial class NeuMemberDeclBlock : NeuNode
     {
         public NeuMemberDeclBlock(
             IEnumerable<Node> children,

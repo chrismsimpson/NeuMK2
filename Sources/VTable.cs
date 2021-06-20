@@ -11,16 +11,16 @@ namespace Neu
     {
         public String? Name { get; init; }
 
-        public Operation Operation { get; init; }
+        public Node Node { get; init; }
 
         ///
 
         public VTableEntry(
             String? name,
-            Operation op)
+            Node node)
         {
             this.Name = name;
-            this.Operation = op;
+            this.Node = node;
         }
     }
 
@@ -36,21 +36,6 @@ namespace Neu
         }
     }
 
-    // public abstract partial class VTable 
-    // {
-    //     public IDictionary<String, Operation> Operations { get; init; }
-
-    //     // public IList<Operation> Operations { get; init; }
-
-    //     ///
-
-    //     public VTable()
-    //     {
-    //         this.Operations = new Dictionary<String, Operation>();
-    //         // this.Operations = new List<Operation>();
-    //     }
-    // }
-
     ///
 
     public static partial class VTableHelpers
@@ -58,14 +43,9 @@ namespace Neu
         public static void Add<T>(
             this VTable<T> vtable,
             T entry)
-            // String name,
-            // Operation operation)
             where T : VTableEntry
         {
             vtable.Entries.Add(entry);
-            // vtable.Entries.Add(new )
-            // vtable.Operations[name] = operation;
-            // vtable.Operations.Add(operation);
         }
     }
 }

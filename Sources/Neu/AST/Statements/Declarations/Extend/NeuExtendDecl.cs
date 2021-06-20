@@ -22,26 +22,40 @@ namespace Neu
     {
         // TODO: generalize to NeuDecl?
 
-        public static String Name(
-            this NeuExtendDecl extendDecl)
-        {
-            foreach (var child in extendDecl.Children)
-            {
-                switch (child)
-                {
-                    case NeuIdentifier identifier:
+        // public static String GetExtendDeclName(
+        //     this NeuExtendDecl extendDecl)
+        // {
+        //     foreach (var child in extendDecl.Children)
+        //     {
+        //         switch (child)
+        //         {
+        //             case NeuIdentifier identifier:
 
-                        return identifier.Source;
+        //                 return identifier.Source;
 
-                    ///
+        //             ///
 
-                    default:
+        //             default:
 
-                        continue;
-                }
-            }
+        //                 continue;
+        //         }
+        //     }
 
-            throw new Exception();
-        }
+        //     throw new Exception();
+        // }
+
+        // public static NeuMemberDeclList GetMemberDeclList(
+        //     this NeuExtendDecl extendDecl)
+        // {
+        //     foreach (var child in extendDecl.Children)
+        //     {
+        //         if (child is NeuMemberDeclList l)
+        //         {
+        //             return l;
+        //         }
+        //     }
+            
+        //     throw new Exception();
+        // }
     }
 }

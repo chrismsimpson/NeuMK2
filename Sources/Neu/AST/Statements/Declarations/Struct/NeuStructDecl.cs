@@ -23,26 +23,42 @@ namespace Neu
     {
         // TODO: generalize to NeuDecl?
 
-        public static String Name(
-            this NeuStructDecl structDecl)
-        {
-            foreach (var child in structDecl.Children)
-            {
-                switch (child)
-                {
-                    case NeuIdentifier identifier:
+        // public static String GetStructDeclName(
+        //     this NeuStructDecl structDecl)
+        // {
+        //     foreach (var child in structDecl.Children)
+        //     {
+        //         switch (child)
+        //         {
+        //             case NeuIdentifier identifier:
 
-                        return identifier.Source;
+        //                 return identifier.Source;
                     
-                    ///
+        //             ///
 
-                    default:
+        //             default:
 
-                        continue;
-                }
-            }
+        //                 continue;
+        //         }
+        //     }
 
-            throw new Exception();
-        }
+        //     throw new Exception();
+        // }
+
+
+
+        // public static NeuMemberDeclBlock GetMemberDeclBlock(
+        //     this NeuStructDecl structDecl)
+        // {
+        //     foreach (var child in structDecl.Children)
+        //     {
+        //         if (child is NeuMemberDeclBlock b)
+        //         {
+        //             return b;
+        //         }
+        //     }
+
+        //     throw new Exception();
+        // }
     }
 }

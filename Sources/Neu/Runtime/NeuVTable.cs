@@ -9,17 +9,17 @@ namespace Neu
 {
     public partial class NeuVTableEntry : VTableEntry
     {
-        public dynamic? MemberAccess { get; init; }
+        public String? MemberName { get; init; }
 
         ///
 
         public NeuVTableEntry(
-            dynamic? memberAccess,
+            String? memberName,
             String? name,
-            Operation op)
-            : base(name, op)
+            Node node)
+            : base(name, node)
         {
-            this.MemberAccess = memberAccess;
+            this.MemberName = memberName;
         }
     }
 
@@ -33,14 +33,14 @@ namespace Neu
     {
         public static void Add(
             this VTable<NeuVTableEntry> vtable,
-            dynamic? memberAccess,
+            String? memberName,
             String? name,
-            NeuOperation op)
+            NeuNode node)
         {
             var entry = new NeuVTableEntry(
-                memberAccess: memberAccess,
+                memberName: memberName,
                 name: name,
-                op: op);
+                node: node);
 
             vtable.Add(entry);
         }

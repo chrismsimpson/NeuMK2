@@ -23,26 +23,26 @@ namespace Neu
     {
         // TODO: generalize to NeuDecl?
 
-        public static String Name(
-            this NeuFuncDecl funcDecl)
-        {
-            foreach (var child in funcDecl.Children)
-            {
-                switch (child)
-                {
-                    case NeuIdentifier identifier:
+        // public static String GetFuncDeclName(
+        //     this NeuFuncDecl funcDecl)
+        // {
+        //     foreach (var child in funcDecl.Children)
+        //     {
+        //         switch (child)
+        //         {
+        //             case NeuIdentifier identifier:
 
-                        return identifier.Source;
+        //                 return identifier.Source;
 
-                    ///
+        //             ///
 
-                    default:
+        //             default:
 
-                        continue;
-                }
-            }
+        //                 continue;
+        //         }
+        //     }
 
-            throw new Exception();
-        }
+        //     throw new Exception();
+        // }
     }
 }

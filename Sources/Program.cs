@@ -63,7 +63,7 @@ namespace Neu
 
             var interpreter = new NeuInterpreter();
 
-            interpreter.Run(sourceFile);
+            interpreter.Execute(sourceFile);
 
             // Write(sourceFile.Dump());
         }
