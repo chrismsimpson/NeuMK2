@@ -18,7 +18,18 @@ namespace Neu
 
     ///
 
-    public partial class NeuBooleanLiteralExpr : NeuLiteralExpr
+    public partial class NeuNumberLiteralExpr : NeuLiteralExpr
+    {
+        public NeuNumberLiteralExpr(
+            IEnumerable<Node> children,
+            SourceLocation start,
+            SourceLocation end)
+            : base(children, start, end) { }
+    }
+
+    ///
+
+    public partial class NeuBooleanLiteralExpr : NeuNumberLiteralExpr
     {
         public NeuBooleanLiteralExpr(
             IEnumerable<Node> children,
@@ -29,7 +40,7 @@ namespace Neu
 
     ///
 
-    public partial class NeuFloatLiteralExpr : NeuLiteralExpr
+    public partial class NeuFloatLiteralExpr : NeuNumberLiteralExpr
     {
         public NeuFloatLiteralExpr(
             IEnumerable<Node> children,
@@ -38,7 +49,7 @@ namespace Neu
             : base(children, start, end) { }
     }
 
-    public partial class NeuIntLiteralExpr : NeuLiteralExpr
+    public partial class NeuIntLiteralExpr : NeuNumberLiteralExpr
     {
         public NeuIntLiteralExpr(
             IEnumerable<Node> children,

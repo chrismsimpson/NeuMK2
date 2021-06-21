@@ -22,9 +22,9 @@ namespace Neu
 
     ///
 
-    public partial class NeuValueResult : ValueResult
+    public partial class NeuValueResult<T> : ValueResult<T>
     {
-        public NeuValueResult()
-            : base() { }
+        public NeuValueResult(T value)
+            : base(value) { }
     }
 }

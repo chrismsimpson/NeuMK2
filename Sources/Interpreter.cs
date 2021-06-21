@@ -11,7 +11,8 @@ namespace Neu
         where F : Frame<Node>
         where E : VTableEntry
     {   
-        internal VTable<E> VTable { get; init; }
+        internal IList<E> VTable { get; init; }
+        // internal VTable<E> VTable { get; init; }
 
         internal Stack<F> Stack { get; init; }
 
@@ -19,7 +20,8 @@ namespace Neu
 
         public Interpreter(
             Stack<F> frames,
-            VTable<E> vtable)
+            IList<E> vtable)
+            // VTable<E> vtable)
         {
             this.Stack = frames;
             this.VTable = vtable;

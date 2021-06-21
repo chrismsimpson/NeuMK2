@@ -23,26 +23,26 @@ namespace Neu
         }
     }
 
-    public partial class NeuVTable : VTable<NeuVTableEntry>
-    {
-        public NeuVTable()
-            : base() { } 
-    }
+    // public partial class NeuVTable : VTable<NeuVTableEntry>
+    // {
+    //     public NeuVTable()
+    //         : base() { } 
+    // }
 
-    public static partial class NeuVTableHelpers
-    {
-        public static void Add(
-            this VTable<NeuVTableEntry> vtable,
-            String? memberName,
-            String? name,
-            NeuNode node)
-        {
-            var entry = new NeuVTableEntry(
-                memberName: memberName,
-                name: name,
-                node: node);
+    // public static partial class NeuVTableHelpers
+    // {
+    //     public static void Add(
+    //         this VTable<NeuVTableEntry> vtable,
+    //         String? memberName,
+    //         String? name,
+    //         NeuNode node)
+    //     {
+    //         var entry = new NeuVTableEntry(
+    //             memberName: memberName,
+    //             name: name,
+    //             node: node);
 
-            vtable.Add(entry);
-        }
-    }
+    //         vtable.Add(entry);
+    //     }
+    // }
 }

@@ -57,9 +57,13 @@ namespace Neu
 
         public static void Interpret()
         {
-            var parser = NeuParser.FromFile("../Tests/Neu/Interpreting/0000-Scratchpad.neu");
+            var file = "../Tests/Neu/Interpreting/0000-Scratchpad.neu";
+
+            var parser = NeuParser.FromFile(file);
 
             var sourceFile = parser.ParseSourceFile();
+
+            Write($"\n//\n// Filename: {file}\n//\n\n{sourceFile.Dump()}\n");
 
             var interpreter = new NeuInterpreter();
 

@@ -3,6 +3,8 @@
 //
 
 using System;
+using System.Linq;
+using System.Collections.Generic;
 
 using static System.String;
 
@@ -24,13 +26,7 @@ namespace Neu
                 {
                     case NeuFuncDecl funcDecl:
 
-                        var memberName = interpreter.GetScopeName();
-
-                        var declName = funcDecl.GetDeclName();
-
-                        result = new NeuDeclResult(funcDecl);
-
-                        interpreter.VTable.Add(memberName, declName, funcDecl);
+                        result = interpreter.Execute(funcDecl);
 
                         break;
 
@@ -96,7 +92,31 @@ namespace Neu
 
                         break;
 
+                    ///
 
+                    case NeuReturnStatement returnStmt:
+
+                        result = interpreter.Execute(returnStmt);
+
+                        break;
+
+                    ///
+
+                    case NeuSequenceExpr sequenceExpr:
+
+                        result = interpreter.Execute(sequenceExpr);
+
+                        break;
+
+                    ///
+
+                    case NeuExprList exprList:
+
+                        result = interpreter.Execute(exprList);
+
+                        break;
+
+                    ///
 
 
 
@@ -119,6 +139,154 @@ namespace Neu
 
             return result;
         }
+
+        public static Result? Execute(
+            this Interpreter<NeuFrame, NeuVTableEntry> interpreter,
+            NeuNumberLiteralExpr lhsExpr,
+            NueBinaryOperatorExpr opExpr,
+            NeuNumberLiteralExpr rhsExpr)
+        {
+            var lhsLiteral = lhsExpr.Children.First() as NeuNumberLiteral;
+
+            if (lhsLiteral == null)
+            {
+                throw new Exception();
+            }
+
+            ///
+
+            var binOp = opExpr.Children.First() as NeuBinaryOperator;
+
+            if (binOp == null)
+            {
+                throw new Exception();
+            }
+
+            ///
+
+            var rhsLiteral = rhsExpr.Children.First() as NeuNumberLiteral;
+
+            if (rhsLiteral == null)
+            {
+                throw new Exception();
+            }
+
+            ///
+
+            return interpreter.Execute(lhsLiteral, binOp, rhsLiteral);
+        }
+
+        public static Result? Execute(
+            this Interpreter<NeuFrame, NeuVTableEntry> interpreter,
+            NeuNumberLiteral lhs,
+            NeuBinaryOperator binOp,
+            NeuNumberLiteral rhs)
+        {
+            switch (true)
+            {
+                case var _ when lhs is NeuIntegerLiteral lhsInt &&
+                                rhs is NeuIntegerLiteral rhsInt:
+
+                    return interpreter.Execute(lhsInt, binOp, rhsInt);
+
+                ///
+                
+                default:
+
+                    throw new Exception();
+            }
+        }
+
+        public static Result? Execute(
+            this Interpreter<NeuFrame, NeuVTableEntry> interpreter,
+            NeuIntegerLiteral lhs,
+            NeuBinaryOperator binOp,
+            NeuIntegerLiteral rhs)
+        {
+            switch (binOp.BinaryOperatorType)
+            {
+                case NeuBinaryOperatorType.Plus:
+
+                    return new ValueResult<int>(lhs.ToInt() + rhs.ToInt());
+
+                ///
+
+                default:
+
+                    throw new Exception();
+            }
+        }
+
+        public static Result? Execute(
+            this Interpreter<NeuFrame, NeuVTableEntry> interpreter,
+            NeuExprList exprList)
+        {
+            switch (exprList.Children.Count())
+            {
+                case 3 when exprList.Children.ElementAt(0) is NeuNumberLiteralExpr lhs &&
+                            exprList.Children.ElementAt(1) is NueBinaryOperatorExpr op &&
+                            exprList.Children.ElementAt(2) is NeuNumberLiteralExpr rhs:
+
+                    return interpreter.Execute(lhs, op, rhs);
+
+                ///
+                
+                default:
+
+                    throw new Exception();
+            }
+        }
+
+        public static Result? Execute(
+            this Interpreter<NeuFrame, NeuVTableEntry> interpreter,
+            NeuSequenceExpr sequenceExpr)
+        {
+            throw new Exception();
+        }
+
+        public static Result? Execute(
+            this Interpreter<NeuFrame, NeuVTableEntry> interpreter,
+            NeuReturnStatement returnStmt)
+        {
+            interpreter.Enter(returnStmt);
+
+            ///
+
+            Result? result = null;
+
+            ///
+            
+            var expr = returnStmt.GetFirst<NeuExpression>();
+
+            if (expr != null)
+            {
+                result = interpreter.Execute(expr);
+            }
+
+            ///
+
+            interpreter.Exit(returnStmt);
+
+            ///
+
+            return result;
+        }
+
+        public static Result? Execute(
+            this Interpreter<NeuFrame, NeuVTableEntry> interpreter,
+            NeuFuncDecl funcDecl)
+        {
+            var memberName = interpreter.GetScopeName();
+
+            var name = funcDecl.GetDeclName();
+
+            var result = new NeuDeclResult(funcDecl);
+
+            interpreter.AddVTableEntry(memberName, name, funcDecl);
+
+            return result;
+        }
+
 
         public static Result? Execute(
             this Interpreter<NeuFrame, NeuVTableEntry> interpreter,
@@ -205,7 +373,14 @@ namespace Neu
                 throw new Exception();
             }
 
-            var n = interpreter.Find(memberName, idName);
+            var entry = interpreter.FindVTableEntry(memberName, idName);
+
+            if (entry == null)
+            {
+                throw new Exception();
+            }
+
+            var result = interpreter.Invoke(funcCallExpr, entry);
 
             throw new Exception();
         }

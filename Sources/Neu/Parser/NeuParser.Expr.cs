@@ -121,6 +121,8 @@ namespace Neu
             {
                 case NeuPunctuationType.Equal:
 
+                    // TODO: wrap this inside another expr?
+
                     return parser.ParseAssignmentExpr(start, modifiers, punc);
 
                 ///
@@ -153,13 +155,17 @@ namespace Neu
             {
                 case NeuFloatLiteral floatLiteral:
 
-                    return parser.ParseNeuFloatLiteralExpr(start, modifiers, floatLiteral);
+                    var floatLiteralExpr = parser.ParseNeuFloatLiteralExpr(start, modifiers, floatLiteral);
+
+                    return parser.ParseExpression(start, floatLiteralExpr);
 
                 ///
 
                 case NeuIntegerLiteral integerLiteral:
 
-                    return parser.ParseNeuIntLiteralExpr(start, modifiers, integerLiteral);
+                    var intLiteralExpr = parser.ParseNeuIntLiteralExpr(start, modifiers, integerLiteral);
+
+                    return parser.ParseExpression(start, intLiteralExpr);
 
                 ///
 
@@ -180,6 +186,16 @@ namespace Neu
             ///
 
             return parser.ParseExpression(start, modifiers, idExpr);
+        }
+
+        ///
+
+        public static NeuExpression ParseExpression(
+            this NeuParser parser,
+            SourceLocation start,
+            NeuExpression expr)
+        {
+            return parser.ParseExpression(start, Empty<NeuToken>(), expr);
         }
 
         public static NeuExpression ParseExpression(

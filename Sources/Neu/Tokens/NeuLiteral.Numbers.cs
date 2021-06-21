@@ -32,4 +32,20 @@ namespace Neu
             SourceLocation end)
             : base(source, start, end) { }
     }
+
+    public static partial class NeuIntegerLiteralHelpers
+    {
+        public static int ToInt(
+            this NeuIntegerLiteral intLiteral)
+        {
+            int i = 0;
+
+            if (int.TryParse(intLiteral.Source, out i))
+            {
+                return i;
+            }
+
+            throw new Exception();
+        }
+    }
 }

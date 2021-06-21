@@ -13,15 +13,15 @@ namespace Neu
     public partial class NeuInterpreter : Interpreter<NeuFrame, NeuVTableEntry>
     {
         public NeuInterpreter()
-            : base(new Stack<NeuFrame>(), new NeuVTable()) { }
+            : base(new Stack<NeuFrame>(), new List<NeuVTableEntry>()) { }
 
         public NeuInterpreter(
             Stack<NeuFrame> frames)
-            : base(frames, new NeuVTable()) { }
+            : base(frames, new List<NeuVTableEntry>()) { }
 
         public NeuInterpreter(
             Stack<NeuFrame> frames,
-            NeuVTable vtable)
+            IList<NeuVTableEntry> vtable)
             : base(frames, vtable) { }
     }
 

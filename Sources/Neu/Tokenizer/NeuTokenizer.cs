@@ -277,6 +277,7 @@ namespace Neu
             {
                 case NeuPunctuationType.Semicolon:
                 case NeuPunctuationType.Comma:
+                case NeuPunctuationType.RightBrace: // TODO: check this?
 
                     return true;
 

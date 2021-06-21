@@ -24,28 +24,28 @@ namespace Neu
         }
     }
 
-    public abstract partial class VTable<T> where T : VTableEntry
-    {
-        internal IList<T> Entries { get; init; }
+    // public abstract partial class VTable<T> where T : VTableEntry
+    // {
+    //     internal IList<T> Entries { get; init; }
 
-        ///
+    //     ///
 
-        public VTable()
-        {
-            this.Entries = new List<T>();
-        }
-    }
+    //     public VTable()
+    //     {
+    //         this.Entries = new List<T>();
+    //     }
+    // }
 
-    ///
+    // ///
 
-    public static partial class VTableHelpers
-    {
-        public static void Add<T>(
-            this VTable<T> vtable,
-            T entry)
-            where T : VTableEntry
-        {
-            vtable.Entries.Add(entry);
-        }
-    }
+    // public static partial class VTableHelpers
+    // {
+    //     public static void Add<T>(
+    //         this VTable<T> vtable,
+    //         T entry)
+    //         where T : VTableEntry
+    //     {
+    //         vtable.Entries.Add(entry);
+    //     }
+    // }
 }
