@@ -75,18 +75,6 @@ namespace Neu
             return tokenizer.RawTokenizeBinaryOperator("==", NeuBinaryOperatorType.EqualTo);
         }
 
-        private static NeuBinaryOperator RawTokenizePlus(
-            this Tokenizer<NeuToken> tokenizer)
-        {
-            return tokenizer.RawTokenizeBinaryOperator('+', NeuBinaryOperatorType.Plus);
-        }
-
-        private static NeuBinaryOperator RawTokenizeMinus(
-            this Tokenizer<NeuToken> tokenizer)
-        {
-            return tokenizer.RawTokenizeBinaryOperator('-', NeuBinaryOperatorType.Minus);
-        }
-
         private static NeuBinaryOperator RawTokenizeIncrementInto(
             this Tokenizer<NeuToken> tokenizer)
         {

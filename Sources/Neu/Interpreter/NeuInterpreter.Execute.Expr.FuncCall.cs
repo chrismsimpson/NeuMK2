@@ -3,12 +3,42 @@
 //
 
 using System;
+using System.Linq;
+using System.Collections.Generic;
+
+using static System.String;
+using static System.Console;
 
 namespace Neu
 {
     public static partial class NeuInterpreterHelpers
     {
-        public static Result? Invoke(
+        public static Result? Execute(
+            this Interpreter<NeuFrame, NeuVTableEntry> interpreter,
+            NeuFuncCallExpr funcCallExpr)
+        {
+            var (memberName, idName) = funcCallExpr.GetMemberAndIdentifierName();
+
+            if (IsNullOrWhiteSpace(idName))
+            {
+                throw new Exception();
+            }
+
+            var entry = interpreter.FindVTableEntry(memberName, idName);
+
+            if (entry == null)
+            {
+                throw new Exception();
+            }
+
+            var result = interpreter.Execute(funcCallExpr, entry);
+
+            throw new Exception();
+        }
+
+        ///
+
+        public static Result? Execute(
             this Interpreter<NeuFrame, NeuVTableEntry> interpreter,
             NeuFuncCallExpr funcCallExpr,
             NeuVTableEntry vtableEntry)
@@ -52,6 +82,8 @@ namespace Neu
                 ///
 
                 var n = interpreter.Execute(codeBlockItem);
+
+                WriteLine($"{n}");
 
                 // foreach (var codeBlockItem )
 

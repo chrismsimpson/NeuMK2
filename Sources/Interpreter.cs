@@ -11,19 +11,19 @@ namespace Neu
         where F : Frame<Node>
         where E : VTableEntry
     {   
-        internal IList<E> VTable { get; init; }
-        // internal VTable<E> VTable { get; init; }
-
         internal Stack<F> Stack { get; init; }
+
+        // internal VTable<E> VTable { get; init; }
+        internal IList<E> VTable { get; init; }
 
         ///
 
         public Interpreter(
-            Stack<F> frames,
+            Stack<F> stack,
             IList<E> vtable)
             // VTable<E> vtable)
         {
-            this.Stack = frames;
+            this.Stack = stack;
             this.VTable = vtable;
         }
     }

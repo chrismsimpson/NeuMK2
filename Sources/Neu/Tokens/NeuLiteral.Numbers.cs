@@ -48,4 +48,20 @@ namespace Neu
             throw new Exception();
         }
     }
+
+    public static partial class NeuFloatLiteralHelpers
+    {
+        public static float ToFloat(
+            this NeuFloatLiteral floatLiteral)
+        {
+            float f = 0;
+
+            if (float.TryParse(floatLiteral.Source, out f))
+            {
+                return f;
+            }
+
+            throw new Exception();
+        }
+    }
 }

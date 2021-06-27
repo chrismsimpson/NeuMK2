@@ -119,6 +119,24 @@ namespace Neu
         {
             switch (punc.PunctuationType)
             {
+                /// Binary Ops
+
+                    /// Arith
+
+                case NeuPunctuationType.Star:
+                case NeuPunctuationType.Slash:
+                case NeuPunctuationType.Plus:
+                case NeuPunctuationType.Dash:
+
+                    /// Comparison
+
+                // case NeuPunctuationType.LessThan:
+                // case NeuPunctuationType.GreaterThan:
+
+                    return parser.ParseBinaryOperatorExpr(start, modifiers, punc);
+
+                ///
+
                 case NeuPunctuationType.Equal:
 
                     // TODO: wrap this inside another expr?

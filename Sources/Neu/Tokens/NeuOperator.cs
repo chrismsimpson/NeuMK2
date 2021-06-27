@@ -25,8 +25,10 @@ namespace Neu
 
     public enum NeuBinaryOperatorType
     {
-        Plus,
-        Minus,
+        Multiply,
+        Divide,
+        Add,
+        Subtract,
         EqualTo,
         GreaterThanOrEqualTo,
         LessThanOrEqualTo,

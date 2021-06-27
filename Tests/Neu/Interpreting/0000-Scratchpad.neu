@@ -4,9 +4,9 @@ struct MyStruct {
 
 extend MyStruct {
 
-    func foo() -> Int {
+    func foo() -> Float {
 
-        return 1 + 2
+        return 2.0 / 3.0
     }
 }
 

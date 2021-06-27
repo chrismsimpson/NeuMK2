@@ -68,6 +68,35 @@ namespace Neu
 
         ///
 
+        private static NeuPunctuation RawTokenizeStar(
+            this Tokenizer<NeuToken> tokenizer)
+        {   
+            return tokenizer.RawTokenizePunctuation('*', NeuPunctuationType.Star);
+        }   
+
+        private static NeuPunctuation RawTokenizeSlash(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizePunctuation('/', NeuPunctuationType.Slash);
+        }
+
+        public static NeuPunctuation RawTokenizePlus(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizePunctuation('+', NeuPunctuationType.Plus);
+        }
+
+        public static NeuPunctuation RawTokenizeDash(
+            this Tokenizer<NeuToken> tokenizer)
+        {
+            return tokenizer.RawTokenizePunctuation('-', NeuPunctuationType.Dash);
+        }
+
+
+
+
+
+
         private static NeuPunctuation RawTokenizeLeftBrace(
             this Tokenizer<NeuToken> tokenizer)
         {

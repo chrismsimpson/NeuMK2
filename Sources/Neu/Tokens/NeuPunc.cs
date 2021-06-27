@@ -26,7 +26,11 @@ namespace Neu
         LessThan,
         GreaterThan,
 
-        Equal
+        Equal,
+        Star,
+        Slash,
+        Plus,
+        Dash
     }
 
     public partial class NeuPunctuation : NeuToken

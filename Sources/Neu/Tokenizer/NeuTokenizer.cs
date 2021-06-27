@@ -117,21 +117,7 @@ namespace Neu
         public static bool IsBinaryOperator(
             NeuPunctuation punc)
         {
-            switch (punc.PunctuationType)
-            {
-                case NeuPunctuationType.LessThan:
-                    return true;
-
-                ///
-
-                case NeuPunctuationType.GreaterThan:
-                    return true;
-
-                ///
-
-                default:
-                    return false;
-            }
+            return ToBinaryOperatorType(punc) is NeuBinaryOperatorType;
         }
 
         ///
@@ -141,10 +127,24 @@ namespace Neu
         {
             switch (punc.PunctuationType)
             {
+                /// Arithmetic
+
+                case NeuPunctuationType.Star:
+                    return NeuBinaryOperatorType.Multiply;
+
+                case NeuPunctuationType.Slash:
+                    return NeuBinaryOperatorType.Divide;
+
+                case NeuPunctuationType.Plus:
+                    return NeuBinaryOperatorType.Add;
+
+                case NeuPunctuationType.Dash:
+                    return NeuBinaryOperatorType.Subtract;
+
+                /// Comparison
+
                 case NeuPunctuationType.LessThan:
                     return NeuBinaryOperatorType.LessThan;
-
-                ///
 
                 case NeuPunctuationType.GreaterThan:
                     return NeuBinaryOperatorType.GreaterThan;
@@ -601,14 +601,8 @@ namespace Neu
                 case '+' when tokenizer.Scanner.Peek(equals: '='):
                     return tokenizer.RawTokenizeIncrementInto();
 
-                case '+':
-                    return tokenizer.RawTokenizePlus();
-
                 case '-' when tokenizer.Scanner.Peek(equals: '='):
                     return tokenizer.RawTokenizeDecrementInto();
-
-                case '-':
-                    return tokenizer.RawTokenizeMinus();
 
                 case '<' when tokenizer.Scanner.Peek(equals: '='):
                     return tokenizer.RawTokenizeLessThanOrEqualTo();
@@ -617,6 +611,20 @@ namespace Neu
                     return tokenizer.RawTokenizeGreaterThanOrEqualTo();
 
                 /// Punctuation
+
+                case '*':
+                    return tokenizer.RawTokenizeStar();
+
+                case '/':
+                    return tokenizer.RawTokenizeSlash();
+
+                case '+':
+                    return tokenizer.RawTokenizePlus();
+
+                case '-':
+                    return tokenizer.RawTokenizeDash();
+
+                    ///
 
                 case '(':
                     return tokenizer.RawTokenizeLeftParen();
