@@ -14,10 +14,16 @@ namespace Neu
         LeftParen,
         RightParen,
 
+        LeftBracket,
+        RightBracket,
+
         Semicolon,
         Colon,
         Arrow,
-        Period
+        Period,
+
+        LessThan,
+        GreaterThan
     }
 
     public partial class IRPunc : IRToken

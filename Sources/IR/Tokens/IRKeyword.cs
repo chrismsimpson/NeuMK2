@@ -8,7 +8,8 @@ namespace Neu
 {
     public enum IRKeywordType
     {
-        Func
+        Func,
+        Return
     }
 
     public partial class IRKeyword : IRToken
