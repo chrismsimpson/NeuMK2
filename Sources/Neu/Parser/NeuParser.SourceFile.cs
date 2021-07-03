@@ -15,7 +15,6 @@ namespace Neu
 
             ///
 
-            // var list = parser.ParseCodeBlockList();
             var list = parser.ParseCodeBlockItemList();
 
             ///
